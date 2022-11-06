@@ -433,7 +433,7 @@ $(document).ready(function() {
     });
 
     var session = getSession();
-
+    
     if (session !== null && session !== "" && session !== undefined) {
         call_api_ajax('SessionTokenExpires', 'get', { SessionToken: session }, false, () => {
                 // Get user data and check if session is not Expired
@@ -704,12 +704,12 @@ $(document).ready(function() {
                                 imgSrc: "resources/css/icons/refresh_16.png",
                                 imgPosition: "right",
                                 textPosition: "center",
-                                width: 28,
+                                width: 75,
                                 height: 28,
                                 imgWidth: 18,
                                 imgHeight: 18,
                             });
-                            $("#refreshReport img").css("top", 3).css("left", 6);
+                            $("#refreshReport img, #refreshReport span").css("top", 3).css("left", 6);
 
                             $("#newReportPadlock").jqxCheckBox({
                                 width: 100,

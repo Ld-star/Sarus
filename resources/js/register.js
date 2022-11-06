@@ -2,9 +2,77 @@ function countryOnChange()
 {
     $("#phone").intlTelInput("setCountry", $("#country").val());
 }
+var  recaptch_index = 0;
 
+$(function(){
+    $('#registrationForm').ebcaptcha();
+  });
+  
+  (function($){
+        
+      jQuery.fn.ebcaptcha = function(options){
+
+          var element = this; 
+          var input = this.find('#ebcaptchainput'); 
+          var label = this.find('#ebcaptchatext'); 
+  
+          var randomNr1 = 0; 
+          var randomNr2 = 0;
+          var totalNr = 0;
+  
+  
+          randomNr1 = Math.floor(Math.random()*10);
+          randomNr2 = Math.floor(Math.random()*10);
+          totalNr = randomNr1 + randomNr2;
+          var texti = randomNr1+" + "+randomNr2 + " = ";
+          $('#ebcaptchatext').text(texti);
+      
+          $(input).keyup(function(){
+  
+              var nr = $(this).val();
+              if(nr!=totalNr)
+              {
+                recaptch_index = 0;
+              }
+              else{
+                recaptch_index = 1;
+              }
+              
+          });
+  
+          $(document).keypress(function(e)
+          {
+              if(e.which==13)
+              {
+                  if((element).find('button[type=submit]').is(':disabled')==true)
+                  {
+                      e.preventDefault();
+                      return false;
+                  }
+              }
+  
+          });
+  
+      };
+  
+  })(jQuery);
 $( document ).ready(function ()
 {
+    $("#ebcaptchainput").click(function(){
+        if(recaptch_index == 0)
+        {
+            $('[data-toggle="popover"]').popover('show'); 
+            document.getElementsByClassName('popover-content')[0].innerHTML +=  `<img src="resources/error.png" style="width: 20px; margin: -4px 5px 0 1px">Input correct answer.`;
+            return;
+        }
+        else{
+            $('[data-toggle="popover"]').popover('hide'); 
+        }
+    });
+    
+    $("#refreshbtn").click(function(){
+        $('#registrationForm').ebcaptcha();
+    });
     $('#profile').attr('href', 'profile?tab=MyProfile');
     $('#favorites').attr('href', 'profilemain?tab=favorites');
 
@@ -66,6 +134,18 @@ $( document ).ready(function ()
 
     function submitForm()
     {
+
+       
+        if(recaptch_index == 0)
+        {
+            $('[data-toggle="popover"]').popover('show'); 
+            document.getElementsByClassName('popover-content')[0].innerHTML +=  `<img src="resources/error.png" style="width: 20px; margin: -4px 5px 0 1px">The answer is not corrent`;
+            return;
+        }
+        else{
+            $('[data-toggle="popover"]').popover('hide'); 
+        }
+
         var first_name = $("#first_name").val();
         if ( first_name == null || first_name === '' ) {
             apprise("The First Name field is blank. Please retype it and try again.");
@@ -135,14 +215,12 @@ $( document ).ready(function ()
                 address : address1,
                 email : email,
                 job : $("#job").val(),
-                vat : $("#vat").val(),
                 phone : $("#phone").intlTelInput("getNumber"),
                 country : country,
                 city : city,
                 post_code : post_code
         };
-
-
+        
         var subject = "IDM REGISTRATION from " + first_name + " " + last_name + " at " + $("#company").val(),
             message = "Name\r\n" + "-------------------------" + "\r\n"
             + first_name + " " + last_name
@@ -166,7 +244,7 @@ $( document ).ready(function ()
         $.ajax({
             url: "https://api.smtp2go.com/v3/email/send",
             method: 'POST',
-            headers: { 'Content-Type': "application/json" },
+            headers: { 'Content-Type': "application/json"  },
             data: JSON.stringify({
             'api_key': "api-EB274C844E8C11EA947BF23C91BBF4A0",
             'to': [
@@ -178,6 +256,7 @@ $( document ).ready(function ()
             }),
         })
         .done(function(result) {
+            console.log(result);
             if ( result.data.succeeded ) {
                 dialogWindow('Thank you. The message has been sent.', "information");
                 $('.form-control').val('');
@@ -194,3 +273,6 @@ $( document ).ready(function ()
     }
     $('body').css('opacity', '1');
 });
+
+
+

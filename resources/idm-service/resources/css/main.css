@@ -193,12 +193,19 @@ div.val.parameter {
     background: transparent !important;
 }
 .jqx-button:not(#contentDiv) {
-    background: transparent !important;
-    border-color: transparent !important;
+    border-color: rgb(205,205,205) !important;
+    background-color: transparent !important;
+	 transition: all 0.3s ease-in;
+/*******************
+    background-color: rgb(246,246,246) !important;
+	 transition: all 0.3s ease-in;
+********************/	
 }
-.jqx-button:not(#contentDiv):hover {
-    border-color: #ddd !important;
-}
+  .jqx-button:not(#contentDiv):hover {
+    border-color: rgb(192,192,192) !important;
+  }
+  
+  
 .jqx-splitter-splitbar-horizontal-light {
     background: #fff !important;
 }
@@ -485,3 +492,34 @@ nav li a img {
     }
 }
 
+/* <!-- recaptcha style --> */
+
+#refreshbtn {
+	width: 63px;
+}
+.Recaptcha{
+	border: 1px solid #dbdbdb;
+	padding: 8px 1px 8px 12px;
+	margin: 10px 10px 35px 0px;
+	width: 240px;
+	background: white;
+	border-radius: 5px;
+	display: flex;
+	justify-content: space-between;
+}
+#ebcaptchainput{
+	margin-right: 20px;
+	margin-top: 8px;
+	margin-bottom: 1px;
+	padding: 16px;
+	height: 10px;
+	width: 60px;
+	border: 1px solid #dbdbdb;
+	border-radius: 0;
+	font-size: 18px;
+}
+.label_C{
+	width: 72px;
+	margin: 12px 2px 3px 10px;
+	font-size: 18px;
+}

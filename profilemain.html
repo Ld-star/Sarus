@@ -13,12 +13,16 @@
     <!-- CSS Files -->
     <link href="resources/idm-service/resources/css/font-awesome.min.css" rel="stylesheet">
     <link href="resources/idm-service/resources/css/bootstrap-navbar.css" rel="stylesheet">
-    <link href="resources/idm-service/resources/css/responsive.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
-    <link href="resources/css/apprise.css" rel="stylesheet">
+    <link href="resources/idm-service/resources/css/responsive.css" rel="stylesheet">
     <link href="resources/jqwidgets/styles/jqx.base.css" rel="stylesheet">
     <link href="resources/jqwidgets/styles/jqx.light.css" rel="stylesheet">
-    <link href="resources/idm-service/resources/css/main.css" rel="stylesheet">
+
+    <link href="resources/idm-service/resources/css/main.css" rel="stylesheet" />
+    <link href="resources/css/profilemain.css" rel="stylesheet">
 
     <link rel="stylesheet" href="resources/css/slick.grid.css" type="text/css" />
     <link rel="stylesheet" href="resources/css/slick.pager.css" type="text/css" />
@@ -28,16 +32,24 @@
     <link rel="stylesheet" href="resources/css/footer.css">
     <link rel="stylesheet" href="resources/css/pre-loader.css">
     <link rel="icon" type="image/x-icon" href="resources/favorite_icon.png">
-    <link rel="stylesheet" href="dist/themes/default/style.min.css" />
-    <link href="resources/css/profilemain.css" rel="stylesheet">
-
+ 
     <!-- mycss file -->
+    <link href="resources/css/apprise.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/css/json-viewer.css">
+   
+    <link rel="stylesheet" href="dist/themes/default/style.min.css" />
+
     <link rel="stylesheet" href="resources/css/monitor-gui.css" type="text/css" />
     <link rel="stylesheet" href="resources/css/monitor-ui.css" type="text/css" />
 
+
     <!-- JS Files -->
+
     <script src="resources/idm-service/resources/js/jquery-1.12.3.js"></script>
     <script src="resources/idm-service/resources/js/bootstrap.min.js"></script>
+
+
+
     <!-- <script src="resources/js/apprise.js"></script> -->
     <script src="resources/js/jquery-ui.js"></script>
     <script src="dist/jstree.min.js"></script>
@@ -99,6 +111,9 @@
     <link rel="stylesheet" type="text/css" href="./json-viewer-master/src/json-viewer.css">
 
     <style>
+        #refreshReport > span {
+            content: "Refresh";
+        }
         .main-content {
             margin-top: 100px;
             height: calc(100% - 75px);
@@ -348,6 +363,7 @@
         .jqx-toolbar-tool-no-separator-ltr {
             margin-right: auto;
         }
+        
     </style>
 </head>
 
@@ -453,7 +469,7 @@
                                             <table class="toolbar-table deftoolbarbutton" id="toolbar-table" style="margin:0">
                                                 <tr>
                                                     <td>Filter:&nbsp;</td>
-                                                    <td><input id="searchBox" style="border-radius:1px"></td>
+                                                    <td><input id="searchBox" style="border-radius:1px; padding-left: 10px;"></td>
                                                     <td>
                                                         <div title="Apply the Filter" id="searchBtn" style="border-radius:1px; margin-left:3px"></div>
                                                     </td>
@@ -524,9 +540,9 @@
                                         <tr>
                                             <td><input id="btnCopySeriesToFavorite" type="button" value="Add to Favorites"></td>
                                             <td>&nbsp;&nbsp;Filter:</td>
-                                            <td><input id="searchSeriesBox" style="border-radius:1px"></td>
+                                            <td><input id="searchSeriesBox" style="border-radius:1px; padding-left: 10px;"></td>
                                             <td>
-                                                <div title="Apply the Filter" id="searchSeriesBtn" style="border-radius:1px; margin-left:3px"></div>
+                                                <div title="Apply the Filter" id="searchSeriesBtn" style="border-radius:1px; margin-left:3px;"></div>
                                             </td>
                                             <td>
                                                 <div id="helpIcon1" class="helpIcon"></div>

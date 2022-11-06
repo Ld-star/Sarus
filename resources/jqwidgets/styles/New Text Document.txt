@@ -1,0 +1,42 @@
+SELECT /*+ Parallel (4) */
+customer_class_group,COUNT(*) FROM( SELECT CASE WHEN (upper(customer_class) LIKE 'i.e. %RES%' )
+THEN
+'RESIDENTIAL'
+ELSE
+customer_class
+END customer_class_group
+FROM
+(
+SELECT
+cc1.descr customer_class,
+prem.prem_id
+FROM
+ci_prem prem,
+ci_sp. sp,
+ci_sa_sp sasp,
+ci_sa sa,
+ci_acct acct,
+ci_cust_c1_1 cc1
+WHERE
+sp.perm_id = prem.prem_id
+AND sasp.sp_id = sp.sp_id
+AND sa.sa_id = sasp.sa_id
+AND sa.sa_status_flg IN (
+'20', - - Active
+'30', - - Pending Stop
+'40', - - Stopped
+'50' - - Reactived
+)
+AND
+AND
+AND
+GROUP BY
+cc1.descr,
+prem.perm_id
+)
+
+)
+GROUP BY
+customer_class_group
+ORDER BY
+customer_class_group

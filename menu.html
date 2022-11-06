@@ -7,11 +7,22 @@
 <link rel="stylesheet" href="resources/css/monitor-gui.css" type="text/css" />
 <link rel="stylesheet" href="resources/css/monitor-ui.css" type="text/css" />
 
-
+<style>
+    #menu12 {
+        display: none;
+        top: 50%;
+        right: -140px;
+    }
+    #other_id {
+        margin-left: 37px;
+    }
+    #other_id:hover #menu12 {
+        display: block;
+    }
+</style>
 <!-- header area -->
 <div class="brand-logo">
-    <!--     <img src="/resources/idm-service/resources/images/IDM-logo-400.png" alt=""> -->
-    <img src="/resources/idm-service/resources/images/SARUS-logo-400.png" alt="Sarus Logo">
+     <img src="/resources/idm-service/resources/images/SARUS-logo-400.png" alt="Sarus Logo">
 
 </div>
 
@@ -79,7 +90,7 @@
             <input id="btnReportEdit" title="Edit Report Properties" type="button" value="Properties" style="border-radius:1px;">
             <input id="btnReportCopy" title="Duplicate Selected Report" type="button" value="Clone" style="border-radius:1px;">
             <input id="btnReportRemove" title="Delete Selected Report" type="button" value="Delete" style="border-radius:1px;">
-            <input id="refreshReport" title="Refresh Report List" type="button" value="">
+            <input id="refreshReport" title="Refresh Report List" type="button" value="Refresh" style="border-radius:1px;">
         </div>
         <div id="reportGrid" class="reportGrid" >
         </div>
@@ -88,8 +99,8 @@
                 <br />the 'Load' button to open it in a new tab</span>
             <table class="report-buttons-table" >
                 <tr>
-                    <td class="report-buttons-load" style="padding-right: 10px;"><input id="btnLoadReport" type="button" value="Load"></td>
-                    <td class="report-buttons-cancel" style="padding-right: 10px;"><input id="btnCancelModal" type="button" value="Cancel"></td>
+                    <td class="report-buttons-load" style="padding-right: 10px;"><input style="box-shadow: -1px 0 5px rgb(0 0 0 / 25%) !important" id="btnLoadReport" type="button" value="Load"></td>
+                    <td class="report-buttons-cancel" style="padding-right: 10px;"><input style="box-shadow: -1px 0 5px rgb(0 0 0 / 25%) !important" id="btnCancelModal" type="button" value="Cancel"></td>
                 </tr>
             </table>
         </div>
@@ -240,6 +251,23 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link headerMenu" href="/xlerate" id="menu3" role="/xlerate"><img src="/resources/css/icons/xlerate20x16.png" alt=""> XLerate for Excel</a>
+				
+				
+        <li id="other_id" class="nav-item dropdown-btn dropdown-btn2"><a class="nav-link">For Partners &nbsp;<i class="fas fa-caret-right"></i></a>
+            <ul  id="menu12" class="dropdown-item">
+                <li class="nav-item">
+                    <a class="nav-link headerMenu"  href="/vendor-page" id="menu7" role="/vendor-page"><img src="/resources/css/icons/vendor-16.png" alt="">Market Data Vendors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link headerMenu"  href="/developer-page" id="menu7" role="/developer-page"><img src="/resources/css/icons/json.png" alt="">Software Developers</a>
+                    </li>
+                <li class="nav-item">
+                    <a class="nav-link headerMenu"  href="/work-with-us" id="menu7" role="/work-with-us"><img src="/resources/css/icons/user_favorite.png" alt=""
+					>Other Partners</a>
+                </li>
+            </ul>
+        </li>
+
             </li>
         </ul>
     </li>
@@ -250,11 +278,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link headerMenu" href="/python-api" id="menu5" role="/python-api"><img src="/resources/css/icons/Python16.png" alt="">Using the Python Package</a>
-            </li>
-            <li class="nav-item">
+             </li>
+          <li class="nav-item">
                 <a class="nav-link headerMenu" href="/api-docs" id="menu6" role="/api-docs"><img src="/resources/css/icons/APIDocs16.png" alt="">API Documentation
                 </a>
             </li>
+
         </ul>
     </li>
 
@@ -263,7 +292,7 @@
     <li class="nav-item register non-login"><a class="nav-link headerMenu" href="/registration" id="menu8" role="/registration">Register</a></li>
     <li class="nav-item login non-login"><a class="nav-link headerMenu" href="/login" id="menu9" role="/login">Login</a>
     </li>
-    <li class="dropdown-btn profile home-menu">
+    <li class="dropdown-btn profile home-menu "   style="display: none;">
         <a class="nav-link"><img src="/resources/css/fonts/man.png" alt=""> <span id="login_name"></span> <i class="fas fa-caret-down"></i> </a>
         <ul class="dropdown-item">
             <li>
@@ -424,6 +453,8 @@
         location.pathname !== '/python-api' &&
         location.pathname !== '/api-docs' &&
         location.pathname !== '/samples' &&
+        location.pathname !== '/developer-page' &&
+        location.pathname !== '/vendor-page' &&
         location.pathname !== '/m-api' &&
         location.pathname !== '/xlerate' &&
         location.pathname !== '/databases' &&

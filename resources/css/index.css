@@ -149,7 +149,7 @@ a {
     background: url(../images/illustrations/banner.png);
     background-position: 125px -70px;
     background-size: cover;
-    height: 480px;
+    height: 500px;
     clip-path: polygon(0% 0%, 100% 0, 100% 80%, 50% 100%, 0 80%);
     padding: 25px 40px 10px;
     margin-top: 100px;
@@ -181,7 +181,7 @@ a {
 .banner-desc p {
     color: #ffff;
     margin: 15px 0px 20px;
-	width: 600px;
+	width: 615px;
 }
 
 .banner-desc .bold-desc {
@@ -197,7 +197,7 @@ a {
 }
 
 .banner-img-wrapper img {
-    width: 440px;
+    width: 470px;
     position: absolute;
     top: -294px;
     right: 10px;
@@ -263,7 +263,7 @@ a {
 
 .service-wrapper {
     background: #fff;
-    padding: 20px 15px 95px;
+    padding: 20px 40px 95px;
 }
 
 .service-text p {

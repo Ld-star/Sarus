@@ -1,0 +1,7 @@
+.jqx-button:not(#contentDiv) {
+    border-color: rgb(246,246,246) !important;
+    background-color: ;
+}
+.jqx-button:not(#contentDiv):hover {
+    border-color: rgb(192,192,192) !important;
+}

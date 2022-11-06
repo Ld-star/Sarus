@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samples</title>
+    <title>Analytics</title>
     <!-- css links -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -34,11 +34,13 @@
     <link rel="stylesheet" href="resources/css/monitor-ui.css" type="text/css" />
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="resources/js/jquery-3.6.0.min.js"></script>
+    <!-- <script src="resources/js/jquery-3.6.0.min.js"></script> -->
     <script src="resources/idm-service/resources/js/jquery-1.12.3.js"></script>
+    <script src="resources/idm-service/resources/js/bootstrap.min.js"></script>
+	<script src="resources/idm-service/resources/js/bootstrap-dropdown.js"></script>
     <!-- <script src="resources/js/bootstrap.bundle.min.js"></script> -->
     <script src="resources/js/jquery-ui.js"></script>
-
+<!-- 
     <script src="resources/jqwidgets/jqxcore.js"></script>
 	<script src="resources/jqwidgets/jqxwindow.js" async></script>
     <script src="resources/jqwidgets/jqxscrollbar.js" async></script>
@@ -60,7 +62,7 @@
 	<script src="resources/js/slick.cellrangeselector.js" async></script>
 	<script src="resources/js/slick.cellselectionmodel.js" async></script>
 	<script src="resources/js/slick.rowmovemanager.js" async></script>
-  	<script src="resources/js/slick.checkboxselectcolumn.js" async></script>
+  	<script src="resources/js/slick.checkboxselectcolumn.js" async></script> -->
 
 
     <script src="resources/jqwidgets/jqxcore.js"></script>
@@ -72,8 +74,11 @@
     <script src="resources/js/common.js"></script>
     <!-- <script src="resources/js/cookies-alert.js"></script> -->
     <script src="resources/js/goto_homepage.js"></script>
-
+    <script defer src="resources/js/contact_us_samples.js"></script>
     <style>
+        .popover.bottom > .arrow {
+			left: 12% !important;
+		}
         table,
         td,
         th {
@@ -100,7 +105,7 @@
                             <h2 class="sample-text">Reports</h2>
                         </div>
                         <div class="banner-desc">
-                            <p> Using the Monitor+ market data API, any company, regardless of size, can create powerful analytic market reports and solutions both quickly and easily.</p>
+                            <p> Using the Monitor+ market data API, any company, regardless of size, can quickly and easily create powerful analytic market reports and solutions.</p>
 
                             <p> Quant research, contract pricing, back testing, software development, 
 							machine learning, forecasting and data visualization are all within easy reach.</p>
@@ -120,9 +125,10 @@
                     <div class="col-12">
                         <h4 class="big-blue-title">OVERVIEW</h4>
                         <div class="sample-analytic-desc">
-                            <p>When using R, Python (and most development languages), virtually
-                                any analytic report can be created using your Monitor+ market data. Ad hoc reports can be created quickly and easily and hundreds of analytic functions such as averages, seasonality, correlations, regressions, ARIMA, machine learning, forecasting are all readily available.
-                                There are no limits to the number (or complexity) of reports that you can create. Reports can integrate with own  data and can be refreshed and updated with the click of a button.</p>
+                            <p>When using "R", Python (and most other development languages), virtually any analytic report can be created using your Monitor+ market data tools. 
+								Ad hoc reports can be created quickly and easily utilizing the hundreds of analytic functions that are freely a available such as averages, seasonality, correlations, regressions and ARIMA.
+								There are functions that cover topics like quant research, backtesting, machine learning, forecasting and more.
+                                There are no artificial limits to the number (or complexity) of reports that can be created. Reports can integrate with customers own data and be refreshed and updated with the click of a button.</p>
                             <p>Jupyter can be used with "R" and Python to create powerful, detailed, interactive market data analytic reports. 
 							Most data scientists and analysts are familiar with these tools and can be using them and productive almost immediately. 
 							We provide native “R” and Python libraries making report development fast as well as making
@@ -144,7 +150,7 @@
                                 <div class="col-md-6">
                                     <h4 class="big-blue-title">SAMPLE REPORTS</h4>
                                     <div class="sample-analytic-desc">
-                                        <p>Subscribers have full access to a range of sample reports that can be used straight out of the box.
+                                        <p>Subscribers have full access to a range of working sample reports that can be used straight out of the box.
                                             They demonstrate how easily powerful analytic reports can be created and
                                             range from simple averages, seasonality, time series analysis
                                             & comparison to ARIMA, basic forecasting and more. </p>
@@ -230,11 +236,11 @@
                 </div>
                 <div class=" row message-area-wrapper">
                     <div class="col-md-6 message-intput-area">
-                        <form action="">
+                        <form action="" id="subForm">
                             <div class="name">
                                 <i class="las la-pen"></i>
                                 <input title="Enter your name here" type="text" placeholder="Your Full Name"
-                                    minlength="4" required>
+                                    minlength="4" id="name" required>
                                 <p class="error-text name-error"><i class="fas fa-exclamation-circle error-icon"></i>The
                                     name must be longer than 3 characters.</p>
                             </div>
@@ -266,7 +272,12 @@
                                 <label for="check">Agree with our <a href="terms-and-conditions">Terms &
                                         Conditions</a></label>
                             </div>
-                            <button type="submit" class="btn send-btn">Send</button>
+                            <div class="Recaptcha">
+                                <img class="btn" id="refreshbtn" src="https://www.gstatic.com/recaptcha/api2/logo_48.png">
+                                <label class="label_C" id="ebcaptchatext"></label>
+                                <input class="textbox" data-toggle="popover" data-placement ="bottom" data-content=" " id="ebcaptchainput" required/>
+                            </div>
+                            <button id="submit" type="submit" class="btn send-btn">Send</button>
                         </form>
                     </div>
                     <div class="col-md-6 mail-image-wrapper">
@@ -282,6 +293,8 @@
         </section>
 
 
+        <!-- <div class="g-recaptcha brochure__form__captcha" data-sitekey="6LeEns8iAAAAAM5U7z0JeLlZB3-OSnwyzBuLupSI" required></div>
+        <div class="g-recaptcha brochure__form__captcha" data-sitekey="6LdRo88iAAAAAJJ-m07EfTpNh0Mtnu0j-prJmYwi" required></div> -->
 
         <div id="dialogWindow">
             <span id="dialogWindowContent"></span>
@@ -294,6 +307,8 @@
     <script src="resources/js/samples.js"></script>
     <!-- <script src="resources/js/bootstrap.bundle.min.js"></script> -->
     <script src="resources/js/include-html.js"></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
+    
 </body>
 
 </html>

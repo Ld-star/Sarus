@@ -1,5 +1,7 @@
 /* Sticky footer styles
 -------------------------------------------------- */
+
+
 body {
 	background: #ececec;
 }
@@ -2169,3 +2171,35 @@ img {
 
 
 
+/* <!-- recaptcha style --> */
+
+#refreshbtn {
+	width: 63px;
+}
+.Recaptcha{
+	border: 1px solid #dbdbdb;
+	padding: 8px 1px 8px 12px;
+	margin: 10px 10px 35px 0px;
+	width: 285px;
+	background: white;
+	border-radius: 5px;
+	display: flex;
+	justify-content: space-between;
+}
+#ebcaptchainput{
+	margin-right: 35px;
+	margin-top: 8px;
+	margin-bottom: 1px;
+	padding: 16px;
+	height: 10px;
+	width: 65px;
+	border: 1px solid #dbdbdb;
+	border-radius: 0;
+	font-size: 18px;
+}
+.label_C{
+	width: 200px;
+	margin: 9px 2px 3px 12px;
+	font-size: 22px;
+}
+ 

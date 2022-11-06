@@ -120,7 +120,6 @@ function call_api_ajax1(funcName, type, parameters = {}, async = true, callback 
                 contentType: 'application/json',
                 success: function(data, textStatus, XmlHttpRequest) {
                     try {
-
                         bc.postMessage({
                             path: 'profile',
                             active: 1,
@@ -362,7 +361,6 @@ function popup_win() {
 
 function dialogWindow(msg, type = null, dialog = null, title = null, callback = () => {}, closed = () => {}, enableDetails = null, button = { Ok: "Ok", Cancel: "Cancel" }, delay = 100) {
     $('#dialogWindow').html('<span id="dialogWindowContent" class="dialogWindowContent"></span>');
-
     if (enableDetails !== null) {
         var userName = '',
             userRef = '',

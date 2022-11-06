@@ -29,11 +29,11 @@
 	<link href="resources/jqwidgets/styles/jqx.base.css" rel="stylesheet">
 	<link href="resources/jqwidgets/styles/jqx.light.css" rel="stylesheet">
 	<link href="resources/idm-service/resources/css/main.css" rel="stylesheet">
-
+<!--
 	<link rel="stylesheet" href="resources/css/slick.grid.css" type="text/css" />
 	<link rel="stylesheet" href="resources/css/slick.pager.css" type="text/css" />
 	<link rel="stylesheet" href="resources/css/slick.columnpicker.css" type="text/css" />
-
+-->
 	<link rel="stylesheet" href="dist/themes/default/style.min.css" />
 	<link rel="stylesheet" href="resources/css/monitor-gui.css" type="text/css" />
     <link rel="stylesheet" href="resources/css/monitor-ui.css" type="text/css" />
@@ -46,7 +46,11 @@
 	<script src="resources/idm-service/resources/js/bootstrap.min.js"></script>
 	<script src="resources/idm-service/resources/js/bootstrap-dropdown.js"></script>
 	<script src="resources/js/jquery-ui.js"></script>
+
+<!--
 	<script src="dist/jstree.min.js"></script>
+	<script src="resources/js/jquery.event.drag-2.3.0.js"></script>
+
 	
 	<script src="resources/jqwidgets/jqxcore.js"></script>
 	<script src="resources/jqwidgets/jqxwindow.js" async></script>
@@ -61,7 +65,6 @@
 	<script src="resources/jqwidgets/jqxmenu.js" async></script>
 	<script src="resources/jqwidgets/jqxcheckbox.js" async></script>
 
-	<script src="resources/js/jquery.event.drag-2.3.0.js"></script>
 	<script src="resources/js/slick.core.js"></script>
 	<script src="resources/js/slick.formatters.js" async></script>
 	<script src="resources/js/slick.editors.js"> async</script>
@@ -72,7 +75,7 @@
 	<script src="resources/js/slick.cellselectionmodel.js" async></script>
 	<script src="resources/js/slick.rowmovemanager.js" async></script>
   	<script src="resources/js/slick.checkboxselectcolumn.js" async></script>
-	
+	-->
 	<script src="dev/api/authentication.js"></script>
 	<script src="dev/api/user_favorites.js"></script>
 	<script src="dev/api/config/config.js"></script>
@@ -80,10 +83,15 @@
 	<script src="resources/js/jquery.ihavecookies.min.js"></script>
 	<script src="resources/js/top-menu.js"></script>
 	<!-- <script src="resources/js/home.js"></script> -->
-	<script src="resources/js/contact.js"></script>
+	
 	<script src="resources/js/goto_homepage.js"></script>
+	<script defer src="resources/js/contact.js"></script>
+	<script src="resources/js/vendor.js"></script>
 
 	<style>
+		.popover.bottom > .arrow {
+			left: 12% !important;
+		}
 		#main-footer {
 			width: 1230px;
 		}
@@ -230,6 +238,11 @@
 										<label class="main-label"></label>
 										<div class="g-recaptcha" data-callback="enableBtn"></div>
 									</div>
+									<div class="Recaptcha">
+										<img class="btn" id="refreshbtn" src="https://www.gstatic.com/recaptcha/api2/logo_48.png">
+										<label class="label_C" id="ebcaptchatext"></label>
+										<input class="textbox" data-toggle="popover" data-placement ="bottom" data-content=" "  id="ebcaptchainput" />
+									</div>
 									<div class="form-group">
 										<button type="submit" class="btn" id="submitButton">Submit</button>
 									</div>
@@ -253,9 +266,8 @@
 
 		<div class="text-center footertxt">
 			<p class="sub-logo">
-				Copyright &copy; 2019 <a target="_blank" href="">International Data Media Limited - Market Data
-					Analysis</a>
-			</p>
+				(c) 2000-2022 Sarus Systems Ltd. Sarus, Monitor+ and XLerate are trademarks of Sarus Systems Ltd.  All trademarks acknowledged.		
+			</p>	
 		</div>
 	</div>
 

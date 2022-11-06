@@ -2533,8 +2533,9 @@ window.onload = function() {
         var singleRow = rows.length == 1 ? "row" : "rows";
         functionNotificationMessage({
             text: rows.length + ' ' + singleRow + ' ' + singleCase + " been copied to the clipboard",
-            type: "info"
         });
+        // $("#infoMessageNotificationContent").text(rows.length + ' ' + singleRow + ' ' + singleCase + " been copied to the clipboard");
+        // $("#infoMessageNotification").jqxNotification("open");
     }
 
     function resizeElements() {
@@ -2743,7 +2744,6 @@ window.onload = function() {
         var export_type = $('input[name="export_type"]:checked').val(),
             rows,
             datasets = [];
-
         if (export_type == "selected") {
             var indexes = grid.getSelectedRows();
             indexes.sort((a, b) => a - b);
@@ -2767,7 +2767,7 @@ window.onload = function() {
                             var getID = v.id.split("-")[v.id.split("-").length - 1];
                             return (rows[v.field] == undefined || rows[v.field] == null) ? "" : (
                                         getID != undefined ? 
-                                            parseFloat(rows['Close-o']).toFixed(4) : 4);
+                                            parseFloat(rows['Close-0']).toFixed(4) : 4);
                         }
                     });
                     datasets.push(data.slice(1));

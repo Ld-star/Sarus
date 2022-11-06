@@ -1,71 +1,9 @@
-// let python_files = [
-//     {btn_name: "Python product1", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product2", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: false},
-//     {btn_name: "Python product3", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product4", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product5", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product6", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product6", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product6", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product6", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product6", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product6", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product6", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product6", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product6", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product7", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product8", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product9", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Python product10", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true}
-// ];
-
-// let r_files = [
-//     {btn_name: "R product1", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "R product2", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: false},
-//     {btn_name: "R product3", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "R product4", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "R product5", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "R product6", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "R product7", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "R product8", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "R product9", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "R product10", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true}
-// ]
-
-// let jupyter_files = [
-//     {btn_name: "Jupyter product1", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: false},
-//     {btn_name: "Jupyter product2", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: false},
-//     {btn_name: "Jupyter product3", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Jupyter product4", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Jupyter product5", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Jupyter product6", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Jupyter product7", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Jupyter product8", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Jupyter product9", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true},
-//     {btn_name: "Jupyter product10", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, ut at vel cum sequi illo iste fugit accusamus explicabo tempore pariatur maxime ducimus asperiores nesciunt quidem, ex aut totam laudantium.", locked: true}
-// ]
-
 let select = document.querySelector('#language-select');
 var per_num = 10;
 
 var session = getSession();
 
 // If the jupyter-list.json file axist then show the select option
-$.ajax({
-    url: 'analytic-demo/jupyter-list.json',
-    type: 'GET',
-    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        // functionNotificationMessage({
-        //     text: 'There is an error at ' + this.url,
-        //     type: 'error'
-        // });
-    },
-    success: function () {
-        let jupyterOption = `<option selected value="jupyter">Jupyter</option>`;
-        $('#language-select').append(jupyterOption);
-    }
-});
-
 // If the python-list.json file axist then show the select option
 $.ajax({
     url: 'analytic-demo/python-list.json',
@@ -77,7 +15,7 @@ $.ajax({
         // });
     },
     success: function () {
-        let pythonOption = `<option value="python">Python</option>`;
+        let pythonOption = `<option  selected value="python">Python</option>`;
         $('#language-select').append(pythonOption);
     }
 });
@@ -304,34 +242,34 @@ function accbtn() {
 }
 
 // form validation check
-let sendtBtn = document.querySelector('.send-btn');
+// let sendtBtn = document.querySelector('.send-btn');
 
-sendtBtn.addEventListener('click', function () {
-    let nameInput = document.querySelector('.name input');
-    companyInput = document.querySelector('.company input');
-    messageInput = document.querySelector('.message textarea');
+// sendtBtn.addEventListener('click', function () {
+//     let nameInput = document.querySelector('.name input');
+//     companyInput = document.querySelector('.company input');
+//     messageInput = document.querySelector('.message textarea');
 
-    if (nameInput.value.length < 3) { //if name inputs value is less then 3 character
-        // then show the error text
-        nameInput.nextElementSibling.style.display = 'block'
+//     if (nameInput.value.length < 3) { //if name inputs value is less then 3 character
+//         // then show the error text
+//         nameInput.nextElementSibling.style.display = 'block'
 
-    } else if (nameInput.value.length > 3) { //if name inputs value is greater then 3 character
-        nameInput.nextElementSibling.style.display = 'none' // then hide the error text
-    }
-    if (companyInput.value.length < 3) { //if company inputs value is less then 3 character
-        companyInput.nextElementSibling.style.display = 'block' // then show the error text
+//     } else if (nameInput.value.length > 3) { //if name inputs value is greater then 3 character
+//         nameInput.nextElementSibling.style.display = 'none' // then hide the error text
+//     }
+//     if (companyInput.value.length < 3) { //if company inputs value is less then 3 character
+//         companyInput.nextElementSibling.style.display = 'block' // then show the error text
 
-    } else if (companyInput.value.length > 3) { //if Company inputs value is greater then 3 character
-        companyInput.nextElementSibling.style.display = 'none' // then hide the error text
-    }
-    if (messageInput.value.length < 10) { //if message inputs value is less then 3 character
-        messageInput.nextElementSibling.style.display = 'block' // then show the error text
+//     } else if (companyInput.value.length > 3) { //if Company inputs value is greater then 3 character
+//         companyInput.nextElementSibling.style.display = 'none' // then hide the error text
+//     }
+//     if (messageInput.value.length < 10) { //if message inputs value is less then 3 character
+//         messageInput.nextElementSibling.style.display = 'block' // then show the error text
 
-    } else if (messageInput.value.length > 10) { //if Company inputs value is greater then 3 character
-        messageInput.nextElementSibling.style.display = 'none' // then hide the error text
-    }
+//     } else if (messageInput.value.length > 10) { //if Company inputs value is greater then 3 character
+//         messageInput.nextElementSibling.style.display = 'none' // then hide the error text
+//     }
 
-})
+// })
 
 function pagination(selection, per_num = 3, sel_page = 1, dataRows) {
     total_page = Math.ceil(dataRows / per_num);

@@ -41,7 +41,7 @@
                     . $_POST['m_telephone']
                     . "\r\n\r\nMessage\r\n" . "-------------------------" . "\r\n"
                     . $_POST['m_comment'];
-    $api_key = "api-EB274C844E8C11EA947BF23C91BBF4A0";
+    $api_key = "api-5E575B1E569A11EDB417F23C91BBF4A0";
     $to = [
         "Support <support@sarus.com>"
     ];

@@ -118,7 +118,7 @@ td button {
     margin-top: 12px
 }
 
-.btnLoadFrequency-td {
+.btnLoadFrequency-td,#btnLoadReport {
     padding-top: 7px;
     padding-right: 10px;
     vertical-align: top;
@@ -224,7 +224,8 @@ td button {
     overflow: hidden;
     cursor: default;
     padding: 5px;
-    border-color: rgb(192, 192, 192) !important;
+    color: white;
+    background-color: #3070b9;
 }
 
 .btncancelFill-td {
@@ -554,7 +555,7 @@ td button {
 }
 
 .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle {
-    background: url(icons/Favorites16.png) 4% no-repeat;
+    background: url(icons/Favorites16.png) 2% no-repeat;
     background-size: 20px;
     text-align: center;
     background-color: rgb(58, 121, 215);
@@ -799,6 +800,9 @@ div.val.parameter {
 
 .ui-draggable .ui-dialog-titlebar {
     text-align: left;
+    text-align: left !important;
+    padding-left: 35px;
+    font-size: 18px;	
 }
 
 .jqx-notification-content {
@@ -1428,7 +1432,7 @@ div#btnCancelFill {
     border: 1px solid #c5c5c5;
 }
 
-div#btnLoadFrequency {
+div#btnLoadFrequency,div#btnLoadReport {
     height: 30px;
     width: 65px;
     box-sizing: border-box;
@@ -1446,6 +1450,7 @@ div#btnCancelFrequency {
     position: relative;
     overflow: hidden;
     cursor: default;
+    border-radius: 2px;
     background-color: #f6f6f6;
     border: 1px solid #c5c5c5;
 }
@@ -1457,6 +1462,7 @@ div#btnLoadDateRange {
     position: relative;
     overflow: hidden;
     cursor: default;
+    border-radius: 2px;
     background-color: #f6f6f6;
     border: 1px solid #c5c5c5;
 }
@@ -1468,6 +1474,7 @@ div#btnCancelDateRange {
     position: relative;
     overflow: hidden;
     cursor: default;
+    border-radius: 2px;
     background-color: #f6f6f6;
     border: 1px solid #c5c5c5;
 }
@@ -1680,13 +1687,12 @@ div#responseToolbar {
 
 #seriesPropertiesPopup .jqx-window-header,
 #selectSeriesPopup .jqx-window-header {
-    background: url(icons/Favorites16.png) 4% no-repeat;
-    background-size: 20px;
-    text-align: center;
-    height: 32px;
-    line-height: 45px;
+    background: url(icons/Favorites16.png) 10px no-repeat;
+    background-size: 22px;
+    text-align: left;
+    padding-left: 56px;
+    line-height: 25px;
     background-color: rgb(58, 121, 215);
-    border-radius: 0px !important;
 }
 
 #reportBackups .jqx-window-header div,
@@ -1702,14 +1708,14 @@ div#responseToolbar {
 
 #seriesPropertiesPopup .jqx-window-header div,
 #selectSeriesPopup .jqx-window-header div {
-    font-size: 20px;
+    font-size: 19px;
     color: #fff;
     line-height: 27px;
-    margin-top: 2px !important;
+    margin-top: 1px !important;
     text-align: left;
     border-radius: 3px;
     margin-right: 12px !important;
-	padding-left:32px;
+	/* padding-left:32px; */
 }
 
 .jqx-rc-all-light {
@@ -1728,7 +1734,7 @@ div#responseToolbar {
 
 .jqx-button:not(#contentDiv):hover {
     font-weight: normal;
-    color: #2b2b2b;
+    /* color: #2b2b2b; */
     box-shadow: 0px 0 5px rgb(0 0 0 / 30%) !important;
 }
 
@@ -2101,7 +2107,6 @@ body.overlay::after {
 #btnReportRestore:active,
 #btnReportRemove:active,
 #refreshReport:active,
-#btnLoadReport:active,
 #btnCancelModal:active,
 #btnSelectBates:active {
     margin-top: 2px;
@@ -2170,7 +2175,7 @@ body.overlay::after {
     font-family: Arial, Helvetica, sans-serif;
     color: #fff;
     line-height: 31px;
-    margin-top: 0 !important;
+    
 }
 
 #reportCreator * {
@@ -3006,8 +3011,8 @@ input#cancelExportDialog:active {
 }
 
 .jqx-notification.jqx-widget td {
-    background-color: transparent !important;
-    color: #fff !important;
+    background-color: #4cae4c !important;
+    color: rgb(14, 33, 97) !important;
 }
 
 .jqx-notification-table {
@@ -3469,7 +3474,7 @@ div#verticalScrollBarinnerListBoxhideDropdown {
 }
 
 .popupFooter .jqx-button {
-    background-color: #f6f6f6 !important;
+    background-color: #f6f6f6;
     border-radius: 1px;
     user-select: none;
     border: 1px solid #c5c5c5 !important;
@@ -3477,11 +3482,22 @@ div#verticalScrollBarinnerListBoxhideDropdown {
 }
 
 .popupFooter .jqx-button:hover {
-    background-color: #ededed !important;
+    /* background-color: #ededed !important; */
     box-shadow: 0px 0 5px rgb(0 0 0 / 30%) !important;
     border-color: #ccc !important;
 }
 
 .ui-dialog-buttonset .ui-button {
     border-radius: 1px;
+}
+#exportDialogWindow .jqx-window-header,
+#saveReportWindow .jqx-window-header,
+#dateRangePopup .jqx-window-header,
+#frequencyPopup .jqx-window-header,
+#fillPopup .jqx-window-header,
+#seriesPropertiesPopup .jqx-window-header,
+#selectSeriesPopup .jqx-window-header {
+  font-family: Arial, Helvetica, sans-serif
+  width: 87% !important;
+  padding-left: 45px;
 }

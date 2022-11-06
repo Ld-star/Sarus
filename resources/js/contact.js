@@ -1,5 +1,44 @@
+$(function(){
+$('#conactUsForm').ebcaptcha();
+});
+
+var  recaptch_index = 0;
+(function($){  
+    jQuery.fn.ebcaptcha = function(options){
+        var element = this; 
+        var input = this.find('#ebcaptchainput'); 
+        var label = this.find('#ebcaptchatext'); 
+
+        var randomNr1 = 0; 
+        var randomNr2 = 0;
+        var totalNr = 0;
+
+
+        randomNr1 = Math.floor(Math.random()*10);
+        randomNr2 = Math.floor(Math.random()*10);
+        totalNr = randomNr1 + randomNr2;
+        var texti = randomNr1+" + "+randomNr2 + " = ";
+        $('#ebcaptchatext').text(texti);
+        $(input).keyup(function(){
+
+            var nr = $(this).val();
+            if(nr!=totalNr)
+            {
+                recaptch_index = 0;
+            }
+            else{
+                recaptch_index = 1;
+            }        
+        });
+    };
+})(jQuery);
 $( document ).ready(function ()
 {
+    
+    $("#refreshbtn").click(function(){
+        $('#conactUsForm').ebcaptcha();
+    });
+    
     var page = getParameterByName('page'),
     sessionToken = getSession(),
     userName = "",
@@ -95,24 +134,31 @@ $( document ).ready(function ()
         });
 
         $('#submitButton').click(function () {
+            var input_value = null;
+            $('#ebcaptchainput').val( input_value );
+            console.log(input_value);
+            if(!recaptch_index ) {
+                $('[data-toggle="popover"]').popover('show'); 
+                document.getElementsByClassName('popover-content')[0].innerHTML +=  `<img src="resources/error.png" style="width: 20px; margin: -4px 5px 0 1px">The answer is not corrent`;
+                return;
+            }
             let name = page.split('-'),
             date = new Date();
-
             name.length -= 1;
             name = name.join(' ');
 	    switch(page)
 	    {
 		case "sales-inquiry":
-		    page_id = "sales";
+		    page_id = "Sales";
 		break;
 		case "market-data-inquiry":
-		    page_id = "marketdata";
+		    page_id = "Marketdata";
 		break;
 		case "support-inquiry":
-		    page_id = "support";
+		    page_id = "Support";
 		break;
 		case "partner-inquiry":
-		    page_id = "parnters";
+		    page_id = "Work with us";
 		break;
 	    }
             var data = { 
@@ -126,7 +172,7 @@ $( document ).ready(function ()
 		m_telephone: $('#telephone').val(),
 		m_comment: $('#comment').val()
             };
-            let subject = 'Web page '+page_id+' message from ' + data['m_email'];
+            let subject = 'Web Server Message ['+page_id+'] from ' + data['m_email'];
 	    var message = "Name\r\n-------------------------\r\n"
                     + data['m_name']
                     + "\r\n\r\nCompany\r\n-------------------------\r\n"
@@ -207,3 +253,4 @@ $( document ).ready(function ()
     }
     $('body').css('opacity', 1);
 });
+

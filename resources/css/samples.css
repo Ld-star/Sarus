@@ -43,6 +43,7 @@ p {
 
 .banner-section .container {
     position: relative;
+	padding-top: 20px;
 }
 
 .banner {
@@ -96,6 +97,7 @@ p {
     align-self: flex-end;
     border-radius: 1px;
     position: absolute;
+	padding-top: 0px;
     top: 0;
     left: 0;
 }
@@ -445,7 +447,7 @@ p {
 
 .send-mail-image {
     width: 350px;
-    margin-bottom: 80px;
+    margin-bottom: 145px;
 }
 
 .jqx-notification-content {

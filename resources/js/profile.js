@@ -28,6 +28,7 @@ $(document).ready(function() {
             closeNav();
         }
     });
+    $("body").addClass('overlay');
     setSession(0, 'IsChangeInfo');
     $.jqx.utilities.scrollBarSize = 11;
 

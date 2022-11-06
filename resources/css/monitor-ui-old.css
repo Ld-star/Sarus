@@ -84,7 +84,7 @@ td button {
 }
 
 #weekends_hint {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .overwriteweek-td {
@@ -118,7 +118,7 @@ td button {
     margin-top: 12px
 }
 
-.btnLoadFrequency-td {
+.btnLoadFrequency-td,#btnLoadReport {
     padding-top: 7px;
     padding-right: 10px;
     vertical-align: top;
@@ -199,7 +199,8 @@ td button {
 
 #updateToJson_fill {
     margin-top: 10px;
-    float: left
+    float: left;
+	padding-left:11px;
 }
 
 #updateValues-help-div3 {
@@ -223,7 +224,8 @@ td button {
     overflow: hidden;
     cursor: default;
     padding: 5px;
-    border-color: rgb(192, 192, 192) !important;
+    color: white;
+    background-color: #3070b9;
 }
 
 .btncancelFill-td {
@@ -428,6 +430,7 @@ td button {
 .fullWidth1 {
     border-radius: 1px;
     min-width: 28px;
+    margin-right: 0;
 }
 
 #jqxgrid {
@@ -882,7 +885,7 @@ div[role="gridcell"] a:hover {
 }
 
 .clear-top {
-    margin-top: 101px !important;
+    margin-top: 100px !important;
 }
 
 .inner-banner {
@@ -890,13 +893,27 @@ div[role="gridcell"] a:hover {
 }
 
 .inner-banner h1 {
-    font-weight: 300;
+/*    font-weight: 300;
     color: #0156a3;
     font-size: 42px;
     margin: 0;
     padding: 8px 0 0 0;
     display: inline-block;
     width: 100%;
+	*/
+	font-weight: 530;
+    color: mintcream;
+    font-size: 42px;
+    margin: 0;
+    padding: 10px 0px 0px 10px;
+    display: inline-block;
+    width: 100%;
+    height: 93px;
+    background-color: #487fa7;
+    text-align: left;	
+	
+	
+	
 }
 
 
@@ -1325,9 +1342,9 @@ div#listitem3innerListBoxhideDropdown>span {
 
 /* ///////////////////////////////////////////////// */
 
-.main-content {
-    margin-top: 100px;
-}
+/* .main-content {
+    margin-top: 40px;
+} */
 
 .slick-preheader-panel.ui-state-default {
     width: 100%;
@@ -1412,7 +1429,7 @@ div#btnCancelFill {
     border: 1px solid #c5c5c5;
 }
 
-div#btnLoadFrequency {
+div#btnLoadFrequency,div#btnLoadReport {
     height: 30px;
     width: 65px;
     box-sizing: border-box;
@@ -1430,6 +1447,7 @@ div#btnCancelFrequency {
     position: relative;
     overflow: hidden;
     cursor: default;
+    border-radius: 2px;
     background-color: #f6f6f6;
     border: 1px solid #c5c5c5;
 }
@@ -1441,6 +1459,7 @@ div#btnLoadDateRange {
     position: relative;
     overflow: hidden;
     cursor: default;
+    border-radius: 2px;
     background-color: #f6f6f6;
     border: 1px solid #c5c5c5;
 }
@@ -1452,6 +1471,7 @@ div#btnCancelDateRange {
     position: relative;
     overflow: hidden;
     cursor: default;
+    border-radius: 2px;
     background-color: #f6f6f6;
     border: 1px solid #c5c5c5;
 }
@@ -1664,13 +1684,12 @@ div#responseToolbar {
 
 #seriesPropertiesPopup .jqx-window-header,
 #selectSeriesPopup .jqx-window-header {
-    background: url(icons/Favorites16.png) 4% no-repeat;
-    background-size: 20px;
-    text-align: center;
-    height: 32px;
-    line-height: 45px;
+    background: url(icons/Favorites16.png) 10px no-repeat;
+    background-size: 22px;
+    text-align: left;
+    padding-left: 42px;
+    line-height: 25px;
     background-color: rgb(58, 121, 215);
-    border-radius: 0px !important;
 }
 
 #reportBackups .jqx-window-header div,
@@ -1679,6 +1698,8 @@ div#responseToolbar {
 #dateRangePopup .jqx-window-header div,
 #frequencyPopup .jqx-window-header div,
 #fillPopup .jqx-window-header div,
+#windowBackups .jqx-window-header div,
+
 
 /* #selectSeriesPopup .jqx-window-header div, */
 
@@ -1687,10 +1708,11 @@ div#responseToolbar {
     font-size: 20px;
     color: #fff;
     line-height: 27px;
-    margin-top: 2px !important;
-    text-align: center;
+    margin-top: 1px !important;
+    text-align: left;
     border-radius: 3px;
     margin-right: 12px !important;
+	/* padding-left:32px; */
 }
 
 .jqx-rc-all-light {
@@ -1708,10 +1730,8 @@ div#responseToolbar {
 }
 
 .jqx-button:not(#contentDiv):hover {
-    /* border: 1px solid #cccccc; */
-    background: #ededed;
     font-weight: normal;
-    color: #2b2b2b;
+    /* color: #2b2b2b; */
     box-shadow: 0px 0 5px rgb(0 0 0 / 30%) !important;
 }
 
@@ -1742,9 +1762,9 @@ div#responseToolbar {
     border: 1px solid #ccc;
     width: 20px !important;
     height: 20px !important;
+    padding-left: 0px;
 }
 
-#reportBackups .jqx-window-header .jqx-window-close-button-background,
 #exportDialogWindow .jqx-window-header .jqx-window-close-button-background,
 #saveReportWindow .jqx-window-header .jqx-window-close-button-background,
 #dateRangePopup .jqx-window-header .jqx-window-close-button-background,
@@ -1752,7 +1772,7 @@ div#responseToolbar {
 #fillPopup .jqx-window-header .jqx-window-close-button-background,
 #seriesPropertiesPopup .jqx-window-header .jqx-window-close-button-background,
 #selectSeriesPopup .jqx-window-header .jqx-window-close-button-background {
-    top: 20%;
+    top: 25%;
     border: 1px solid #c5c5c5;
     background: #f6f6f6;
     font-weight: normal;
@@ -1760,6 +1780,7 @@ div#responseToolbar {
     width: 20px !important;
     height: 20px !important;
     padding-bottom: 4px;
+    padding-right: 25px;
     right: 1px !important;
 }
 
@@ -1780,7 +1801,7 @@ div#responseToolbar {
 
 #startDate_btnCalendar img:hover,
 #endDate_btnCalendar img:hover {
-    box-shadow: 0px 0 5px rgb(0 0 0 / 30%);
+    box-shadow: 0px 0 8px rgb(0 0 0 / 50%);
     /* border: 1px solid #ddd; */
 }
 
@@ -2083,7 +2104,6 @@ body.overlay::after {
 #btnReportRestore:active,
 #btnReportRemove:active,
 #refreshReport:active,
-#btnLoadReport:active,
 #btnCancelModal:active,
 #btnSelectBates:active {
     margin-top: 2px;
@@ -2146,11 +2166,13 @@ body.overlay::after {
 }
 
 #reportBackups .jqx-window-header div,
-#reportCreator .jqx-window-header div {
+#reportCreator .jqx-window-header div,
+#windowBackups .jqx-window-header div {
     font-size: 17px;
     font-family: Arial, Helvetica, sans-serif;
     color: #fff;
     line-height: 31px;
+    
 }
 
 #reportCreator * {
@@ -2166,7 +2188,9 @@ body.overlay::after {
 }
 
 #reportBackups .jqx-window-header .jqx-window-close-button-background,
-#reportCreator .jqx-window-header .jqx-window-close-button-background {
+#reportCreator .jqx-window-header .jqx-window-close-button-background ,
+#windowBackups .jqx-window-header .jqx-window-close-button-background
+{
     background-color: #f3f3f3;
     border-radius: 3px;
     top: 10px;
@@ -2175,9 +2199,20 @@ body.overlay::after {
     border: 1px solid #ccc;
     margin-right: 15px !important;
 }
-
+#windowBackups .jqx-window-header .jqx-window-close-button-background {
+    right: 0 !important;
+    margin-right: 8px !important;
+}
+div#backup-container .jqx-button {
+    box-shadow: none !important;
+    border: none;
+}
+#windowBackups .jqx-window-close-button-background{
+    right: 0 !important;
+}
 #reportBackups .jqx-window-header,
-#reportCreator .jqx-window-header {
+#reportCreator .jqx-window-header,
+#windowBackups .jqx-window-header {
     background: url(icons/Favorites16.png) 10px no-repeat;
     background-size: 22px;
     text-align: left;
@@ -2655,6 +2690,7 @@ body.hiddenBody>*:not(.ui-dialog) {
 .seriesviewer th {
     padding: 0px;
     border: none;
+	background-color: white !important;
 }
 
 .seriesviewer .correction-cell {
@@ -2972,8 +3008,8 @@ input#cancelExportDialog:active {
 }
 
 .jqx-notification.jqx-widget td {
-    background-color: transparent !important;
-    color: #fff !important;
+    background-color: #4cae4c !important;
+    color: rgb(14, 33, 97) !important;
 }
 
 .jqx-notification-table {
@@ -3395,7 +3431,8 @@ div#verticalScrollBarinnerListBoxhideDropdown {
     padding-right: 12px!important;
 }
 
-.deftoolbarbutton .jqx-button {
+.deftoolbarbutton .jqx-button,
+#backup-container .jqx-button {
     margin-right: 10px;
     border-color: #ddd;
     box-shadow: none !important;
@@ -3403,7 +3440,7 @@ div#verticalScrollBarinnerListBoxhideDropdown {
     border-width: 0px !important;
     /*  Don Added */
     border-radius: 1px !important;
-    height: 28px !important;
+    height: 24px !important;
     box-sizing: border-box !important;
     position: relative !important;
     overflow: hidden !important;
@@ -3434,14 +3471,15 @@ div#verticalScrollBarinnerListBoxhideDropdown {
 }
 
 .popupFooter .jqx-button {
-    background-color: #f6f6f6 !important;
+    background-color: #f6f6f6;
     border-radius: 1px;
+    user-select: none;
     border: 1px solid #c5c5c5 !important;
     box-shadow: none !important;
 }
 
 .popupFooter .jqx-button:hover {
-    background-color: #ededed !important;
+    /* background-color: #ededed !important; */
     box-shadow: 0px 0 5px rgb(0 0 0 / 30%) !important;
     border-color: #ccc !important;
 }
