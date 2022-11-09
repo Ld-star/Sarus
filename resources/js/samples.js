@@ -319,6 +319,7 @@ function code_view(selection, url, btn_active) {
             )
         }
     }
+   
 }
 
 function download(url, btn_active) {
