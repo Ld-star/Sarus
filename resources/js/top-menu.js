@@ -1,7 +1,7 @@
 $(document).ready(function () {
     //console.log("top-menu");
 
-    $(".dropdown").hover(function (event) {
+    $("nav-menu .dropdown").hover(function (event) {
         event.stopPropagation();
         $('> ul.dropdown-menu', this).stop(true, true).fadeToggle("fast");
         $(this).toggleClass('open');

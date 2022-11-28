@@ -99,26 +99,26 @@
             padding: 32px;
         }
 
-        @media screen and (max-width:991px) {
-            .clear-top {
-                margin-top: 65px !important;
-            }
-        }
-
-        @media screen and (max-width:767px) {
-            .clear-top {
-                margin-top: 50px !important;
-            }
-        }
+        @media screen and (max-width:880px) {
+			.banner-section {
+				padding-top: 27px !important;
+				margin-top: 50px !important;
+			}
+		}
     </style>
 </head>
 
 <body>
+    <div id="messageNotification">
+        <div id="message_text">
+            
+        </div>
+    </div>
     <div class="fixpage">
 
         <nav include-html="menu.html" id="menu_file" class="navbar navbar-default navbar-fixed-top "></nav>
 
-        <section class="container main-content dis-block clearfix footer-space clear-top">
+        <section class="container main-content dis-block banner-section footer-space">
             <!-- <h1>Cookie Policy</h1> -->
 
             <div class="head-img">
@@ -224,7 +224,9 @@
                 <p>For other browsers, please visit your web browser's official web pages</p>
             </div>
         </section>
-
+        <div id="dialogWindow">
+            <span id="dialogWindowContent"></span>
+          </div>
         <div include-html="footer.html" id="footer_file"></div>
 
         <div class="text-center footertxt">

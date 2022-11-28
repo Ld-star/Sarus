@@ -1074,6 +1074,7 @@ button#gdpr-cookie-advanced {
 
 nav li a img {
     margin-right: 5px;
+	margin-top: -5px;
 }
 
 .jqx-notification-content {
@@ -1147,15 +1148,15 @@ nav li a img {
 
 @media screen and (max-width:1200px) {
     .idm-box {
-        width: 320px;
+        width: 48%;
     }
 }
 
-@media screen and (max-width:1100px) {
+/* @media screen and (max-width:1100px) {
     .idm-box {
         width: 300px;
     }
-}
+} */
 
 @media screen and (max-width:991px) {
     .clear-top {
@@ -2172,6 +2173,7 @@ body.overlay::after {
 #reportCreator .jqx-window-header div,
 #windowBackups .jqx-window-header div {
     font-size: 17px;
+	font-weight: 600;
     font-family: Arial, Helvetica, sans-serif;
     color: #fff;
     line-height: 31px;
@@ -2200,7 +2202,7 @@ body.overlay::after {
     width: 20px !important;
     height: 20px !important;
     border: 1px solid #ccc;
-    margin-right: 15px !important;
+    margin-right: 20px !important;
 }
 #windowBackups .jqx-window-header .jqx-window-close-button-background {
     right: 0 !important;
@@ -2220,6 +2222,7 @@ div#backup-container .jqx-button {
     background-size: 22px;
     text-align: left;
     padding-left: 42px;
+    width: calc(100% - 40px) !important;
     line-height: 25px;
     background-color: rgb(58, 121, 215);
 }
@@ -3011,7 +3014,7 @@ input#cancelExportDialog:active {
 }
 
 .jqx-notification.jqx-widget td {
-    background-color: #4cae4c !important;
+    /* background-color: #4cae4c !important; */
     color: rgb(14, 33, 97) !important;
 }
 
@@ -3497,7 +3500,7 @@ div#verticalScrollBarinnerListBoxhideDropdown {
 #fillPopup .jqx-window-header,
 #seriesPropertiesPopup .jqx-window-header,
 #selectSeriesPopup .jqx-window-header {
-  font-family: Arial, Helvetica, sans-serif
+  font-family: Arial, Helvetica, sans-serif;
   width: 87% !important;
   padding-left: 45px;
 }

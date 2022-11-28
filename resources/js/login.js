@@ -32,7 +32,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event){
         {
             var path = "profilemain?tab=favorites",
             lastPath = getSession("path");
-            
+            console.log(lastPath);
             if ( lastPath !== "" && lastPath !== null && lastPath !== undefined && !lastPath.includes('login') )
                 path = lastPath;
             
@@ -45,14 +45,17 @@ document.getElementById('loginForm').addEventListener('submit', function(event){
                 	
                     setSession( data.Result.SessionToken );
                     setSession( path, "path" );
-                    setCookie("user_logout", 0);
+                    setCookie("user_logout", 0);   
+                    var session = getSession();
 
-                    // comment this out on safari
-                    // bc.postMessage({
-                    //     path: 'profile',
-                    //     active: 1,
-                    //     SessionToken: data.Result.SessionToken
-                    // });
+                    call_api_ajax('GetMyAccountDetails', 'get', { SessionToken: session }, true, (data) => {
+                        var username = data.Result.Name; 
+                        setSession( username, "username_login" ); 
+                    },
+                    () => {
+                        return false;
+                    }, null, false);
+ 
 
                     call_api_ajax('ReadUserJSONSettings', 'get', 
                         { SessionToken: data.Result.SessionToken }
@@ -71,13 +74,15 @@ document.getElementById('loginForm').addEventListener('submit', function(event){
                             if (data.Credentials.UserName == true) setCookie('username', dataP.Username);
                             if (data.Credentials.Password == true) setSession( password, "password" );
 
-                            setSession( 1,'defaultMin');
+                            setSession( 1,'defaultMin'); 
                             // setCookie("remaining", (data.Token.DefaultMins*60*1000));
                             setCookie("remaining", 1);
                         }
                     });
+                    setTimeout(() => {
+                        window.location.href = path;
+                    }, 300);
                     
-                    window.location.href = path;
                 },
                 error: function ( XMLHttpRequest )
                 {
@@ -179,38 +184,7 @@ $( document ).ready(function()
           });
       });
 
-   
-    // $('#password').on('keyup', function ()
-    // {
-    //     $('.fa-eye-slash').addClass('show-eye');
-
-    //     let last = $( this ).val().substr( $( this ).val().length - 1 );
-
-    //     if ( last !== '•' && last !== '' && $( this ).val() !== "" )
-    //     {
-    //         password += last;
-    //         //$( this ).val( $( this ).val().slice(0, -1) + '•' );
-    //     }
-    // })
-    // .on('keydown', function ( e )
-    // {
-    //     if ( e.key == "Enter" ) {
-    //         e.preventDefault();
-    //     }
-        
-    //     let val = $( this ).val();
-    //     let len = val.length;
-
-    //     if ( password.length > len ) password = '';
-        
-    //     //$( this ).val( '•'.repeat( len ) );
-
-    //     if ( e.which == 8 )
-    //         password = password.slice(0, -1);
-    //     else if ( e.which !== 8 && val.substr(len - 1) !== '•' )
-    //         password += val.substr(len - 1);
-    // });
-
+     
 
     $('[data-toggle="popover"]').popover();
     $("#termAndConditions").attr( "data-content",  "Term and Conditions");
@@ -243,133 +217,7 @@ $( document ).ready(function()
         setSession("", "error", true);
     }
 
-    
-    $('#loginForm').submit(function( event )
-    {
-        event.preventDefault();
-        password = $('#password').val();
-        var dataP = {
-            UserReferenceNo: $('#id').val(),
-            Username: $('#usernameForm').val(),
-            Password: password
-        };
-
-        // if(getSession('defaultMin') > 0 ){
-        //     dataP.Minutes = 1;
-        // }
-        dataP.Minutes = 1;
-        var testUser = dataP.Username.split(' ').join(''),
-            testPass = dataP.Password.split(' ').join(''),
-            testRefN = dataP.UserReferenceNo.split(' ').join('');
-			
-        if ( testUser !== "" && testPass !== "" && testRefN !== ""
-            && dataP.UserReferenceNo.length > 3 && dataP.Username.length > 3 && dataP.Password.length > 3
-            )
-        {
-            call_api_ajax('GetSessionToken', 'get', dataP, true, ( data ) =>
-            {
-                var path = "profilemain?tab=favorites",
-                lastPath = getSession("path");
-                
-                if ( lastPath !== "" && lastPath !== null && lastPath !== undefined && !lastPath.includes('login') )
-                    path = lastPath;
-
-                $.ajax({
-                    url: 'encrypt.php',
-                    type: 'post',
-                    data: { password: window.btoa( password ), type: 'encrypt' },
-                    success: function ( password )
-                    {
-                        setSession( data.Result.SessionToken );
-                        setSession( path, "path" );
-                        setCookie("user_logout", 0);
-
-                        bc.postMessage({
-                            path: 'profile',
-                            active: 1,
-                            SessionToken: data.Result.SessionToken
-                        });
-
-                        call_api_ajax('ReadUserJSONSettings', 'get', { SessionToken: data.Result.SessionToken }, false, ( data ) =>
-                        {
-                            data = JSON.parse(data.Result);
-                            if ( data !== undefined )
-                            {                            
-                                setCookie('remember-id',        data.Credentials.UserRef);
-                                setCookie('remember-username',  data.Credentials.UserName);
-                                setCookie("remember-password",  data.Credentials.Password);
-                                setCookie("remember-checkbox",  data.Credentials.Confirm);
-                                setCookie("remember-renewToken",  data.AutoLogin ? 'true' : 'false');
-
-                                if (data.Credentials.UserRef == true) setCookie('id', dataP.UserReferenceNo);
-                                if (data.Credentials.UserName == true) setCookie('username', dataP.Username);
-                                if (data.Credentials.Password == true) setSession( password, "password" );
-
-                                setSession(1, 'defaultMin' );
-                                // setCookie("remaining", (data.Token.DefaultMins*60*1000));
-                                setCookie("remaining", 1);
-                            }
-                        });
-                        
-                        // window.location.href = path;
-                    },
-                    error: function ( XMLHttpRequest )
-                    {
-                        let error = XMLHttpRequest.responseJSON.Errors;
-                        error.Details = ( error.Details == "" ) ? XMLHttpRequest.statusText : error.Details;
-
-                        let errorMsg = String ( error.Details );
-                        errorMsg = ( errorMsg.indexOf('Trace') !== -1 ) ? errorMsg.split('Trace:')[1] : errorMsg;
-                        
-                        dialogWindow("The request returned error " + error.Status + ". ( " + errorMsg + " )", "error");
-                        throw ( errorMsg + ' ' + error.Status );
-                    },
-                    async: false
-                });
-            }, () =>
-            {
-                dialogWindow("You have entered an invalid account number, username or password.<br>Please check and try again or use the 'Forgot Password' link below.", "error");
-                return false;
-            }, null, false);
-        }
-        else {
-            if ( testRefN == "" ) {
-                dialogWindow('Please enter a valid User Reference Number.', 'error', null, null, () => {
-                    $('#id').focus();
-                });
-            }
-            else if ( dataP.UserReferenceNo.length <= 3 )
-            {
-                dialogWindow('The User Reference Number cannot be less than 4 characters long.', 'error', null, null, () => {
-                    $('#id').focus();
-                });
-            }
-            else if ( testUser == "" ) {
-                dialogWindow('Please enter a valid user name.', 'error', null, null, () => {
-                    $('#usernameForm').focus();
-                });
-            }
-            else if ( dataP.Username.length <= 3 )
-            {
-                dialogWindow('The user name cannot be less than 4 characters long.', 'error', null, null, () => {
-                    $('#usernameForm').focus();
-                });
-            }
-            else if ( testPass == "" ) {
-                dialogWindow('Please enter a valid password.', 'error', null, null, () => {
-                    $('#password').focus();
-                });
-            }
-            else if ( dataP.Password.length <= 3 )
-            {
-                console.log( dataP.password )
-                dialogWindow('The password cannot be less than 4 characters long.', 'error', null, null, () => {
-                    $('#password').focus();
-                });
-            }
-        }
-    });
-
+   
     
     $( window ).keydown(function ( e ) {
         $('.forrm-control').blur();

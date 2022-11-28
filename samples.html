@@ -17,19 +17,21 @@
     <link href="resources/idm-service/resources/css/bootstrap-navbar.css" rel="stylesheet">
     <link href="resources/idm-service/resources/css/responsive.css" rel="stylesheet">
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
-    <link href="resources/jqwidgets/styles/jqx.base.css" rel="stylesheet">
-    <link href="resources/jqwidgets/styles/jqx.light.css" rel="stylesheet">
+
     <link rel="stylesheet" href="resources/css/menu.css">
     <link rel="stylesheet" href="resources/css/footer.css">
     <link rel="stylesheet" href="resources/css/samples.css">
-
+    <link rel="stylesheet" href="resources/css/r-package.css">
     <link href="resources/jqwidgets/styles/jqx.base.css" rel="stylesheet">
 	<link href="resources/jqwidgets/styles/jqx.light.css" rel="stylesheet">
 	<link href="resources/idm-service/resources/css/main.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="resources/css/slick.grid.css" type="text/css" />
+ <!--	<link rel="stylesheet" href="resources/css/slick.grid.css" type="text/css" />
 	<link rel="stylesheet" href="resources/css/slick.pager.css" type="text/css" />
-	<link rel="stylesheet" href="resources/css/slick.columnpicker.css" type="text/css" />
+	<link rel="stylesheet" href="resources/css/slick.columnpicker.css" type="text/css" 
+-->	
+	
+	
     <link rel="stylesheet" href="resources/css/monitor-gui.css" type="text/css" />
     <link rel="stylesheet" href="resources/css/monitor-ui.css" type="text/css" />
 
@@ -40,7 +42,7 @@
 	<script src="resources/idm-service/resources/js/bootstrap-dropdown.js"></script>
     <!-- <script src="resources/js/bootstrap.bundle.min.js"></script> -->
     <script src="resources/js/jquery-ui.js"></script>
-<!-- 
+
     <script src="resources/jqwidgets/jqxcore.js"></script>
 	<script src="resources/jqwidgets/jqxwindow.js" async></script>
     <script src="resources/jqwidgets/jqxscrollbar.js" async></script>
@@ -53,23 +55,12 @@
     <script src="resources/jqwidgets/jqxnotification.js"></script>
 
 	<script src="resources/js/jquery.event.drag-2.3.0.js"></script>
-	<script src="resources/js/slick.core.js"></script>
-	<script src="resources/js/slick.formatters.js" async></script>
-	<script src="resources/js/slick.editors.js"> async</script>
-	<script src="resources/js/slick.rowselectionmodel.js" async></script>
-	<script src="resources/js/slick.grid.js" async></script>
-	<script src="resources/js/slick.dataview.js" async></script>
-	<script src="resources/js/slick.cellrangeselector.js" async></script>
-	<script src="resources/js/slick.cellselectionmodel.js" async></script>
-	<script src="resources/js/slick.rowmovemanager.js" async></script>
-  	<script src="resources/js/slick.checkboxselectcolumn.js" async></script> -->
-
+    
 
     <script src="resources/jqwidgets/jqxcore.js"></script>
     
     <script src="dev/api/authentication.js"></script>
     <script src="dev/api/config/config.js"></script>
-
     <script src="resources/js/top-menu.js"></script>
     <script src="resources/js/common.js"></script>
     <!-- <script src="resources/js/cookies-alert.js"></script> -->
@@ -84,11 +75,40 @@
         th {
             border: 0px;
         }
+        .commet{
+            width: 84%;
+            text-align: center;
+            margin-left: 8%;
+            color: #2a4996;
+            font-size: 17px;
+            padding: 20px;
+        }
+        .commet p {
+            font-size: 17px;
+            text-align: center;
+            color: #2a4996;
+        }
+        .commet .disabled {
+            cursor: not-allowed;
+            pointer-events: inherit;
+            color: #fff;
+            background-color: #9d9d9d82;
+            border-color: #f2f2f2;
+        } 
+        #RunDialog {
+                left:22%;
+            }
+        @media screen and (min-width: 1440px) {
+            #RunDialog {
+                left:  calc((100% - 835px) /2 );
+            }
+        }
     </style>
 
 </head>
 
 <body class="default">
+ 
     <div class="fixpage">
         <nav include-html="menu.html" id="menu_file" class="navbar navbar-default navbar-fixed-top "></nav>
         <!-- banner section -->
@@ -182,8 +202,7 @@
                         </select>
                     </div>
                     <div class="accordion-top-text">
-                        <h6>Click on any report name below to see it's details (only subscribers can access all
-                            reports).
+                        <h6>Click on any report name below to see its details (only subscribers can access all the reports).
                         </h6>
                     </div>
 
@@ -192,18 +211,13 @@
                     <div class="accordions-wrapper ">
                         <div class="accordion-table-header">
                             <h6>Report name</h6>
-                            <h6>Status</h6>
-                        </div>
-
-                        <div class="jupyter-files">
-                            <div id="jupyter-body"></div>
-                            <nav aria-label="..." id="jupyter_pagination"></nav>
+                            <h6>Level&nbsp;&nbsp;&nbsp;&nbsp; Status</h6>
                         </div>
 
                         <div class="python-files">
                             <div id="python-body"></div>
                             <nav aria-label="..." id="python_pagination"></nav>
-                        </div>
+                        </div> 
 
 
                         <div class="r-files">
@@ -211,9 +225,11 @@
                             <nav aria-label="..." id="r_pagination"></nav>
                         </div>
 
-
-
-
+                        <div class="commet"> 
+                            You can view, run or download the sample reports. Currently only
+                            Python reports can be run. 
+                            <p style="font-size:17px">Only logged in users can access all the features of all the reports.</p> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -224,7 +240,7 @@
         <section class="need-analytics-section">
             <div class="container">
                 <div class="analytics-title-area">
-                    <h2 class="big-blue-title">WANT MORE ANALYTICS?</h2>
+                    <h2 class="big-blue-title">NEED MORE ANALYTICS?</h2>
                     <hr>
                     <p>If you'd like more information about custom report development, specific analytic functions or
                         using Monitor+ with other development languages then get in touch and we'll be glad to help.
@@ -261,7 +277,7 @@
                             <div class="message">
                                 <i class="las la-sms"></i>
                                 <textarea id="message" title="Enter your message here" cols="30" rows="10"
-                                    minlength="11" placeholder="Your Request" required></textarea>
+                                    minlength="16" placeholder="Your Request" required></textarea>
                                 <p class="error-text textarea-error">
                                     <i class="fas fa-exclamation-circle error-icon"></i>Message
                                     must be longer than 10 characters.</p>
@@ -290,11 +306,47 @@
             <hr class="bottom-hr ">
             <p class="tradmark-text">(c) 2000-2022 Sarus Systems Ltd. Sarus, Monitor+ and XLerate are trademarks of Sarus Systems Ltd.  All trademarks acknowledged.</p>
             <br><br>
+            <div id="RunDialog" class="notVisible ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-dialog-buttons ui-draggable" tabindex="-1" role="dialog" aria-describedby="dialogWindow" aria-labelledby="ui-id-1" style="height: auto; width:56%; max-width: 835px; top: 18%; background: #ecf7fd;position: fixed;">
+                <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle">
+                    <span id="ui-id-1" class="ui-dialog-title" style="  margin-left: 10px;">Monitor+</span>
+                    <button id="close_id_btn" type="button" class=" ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" title="Close" style="right: 15px;">
+                        <span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>
+                        <span class="ui-button-text">Close</span>
+                    </button>
+                </div>
+                <div  class="ui-dialog-content ui-widget-content" style="display: block; width: auto; min-height: 0px; max-height: none; height: auto;">
+                    <div class="row">
+                        <div class="col-4" style="display: flex; align-items: center;">
+                            <img style="width: 100%;" src="/resources/css/images/RunSamples.png"/>
+                        </div>
+                        <div class="col-8" style="padding-left: 35px; padding-right: 20px; font-family: Calibri;">
+                            <h2 style="color: #2A4996;padding-top: 16px;">Run these reports on a live Jupyter server.</h2>
+                            <br /><br />
+                            <p style="color: #2A4996;font-size: 17px;"> You can now run these sample reports on a live Jupyter server.
+                            You can change the symbols, date range, averages, fills etc and see the reports update.
+                            <br /><br />
+                            To run the Python samples, click on the <span style="font-size: 17px;font-weight: 600;">Run</span> button below.
+                            <br /><br />
+                            We'll need to spin up a server so it may take a few moments.</p>
+                        </div>
+                    </div>
+                    <span class="dialogWindowContent"></span>
+                </div>
+                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix" style="background: #ecf7fd;">
+                    <div class="ui-dialog-buttonset">
+                        <button id="run_id_btn" class="btn btn-lg btn-success" style="border-radius: 0 !important;font-size: 15px;" >
+                            <span >Run</span>
+                        </button>
+                        <button id="cancel_id_btn" class="btn btn-lg btn-warning"style="border-radius: 0 !important;font-size: 15px;" >
+                            <span >Cancel</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </section>
 
-
-        <!-- <div class="g-recaptcha brochure__form__captcha" data-sitekey="6LeEns8iAAAAAM5U7z0JeLlZB3-OSnwyzBuLupSI" required></div>
-        <div class="g-recaptcha brochure__form__captcha" data-sitekey="6LdRo88iAAAAAJJ-m07EfTpNh0Mtnu0j-prJmYwi" required></div> -->
+        
+		<div id="background_grey" class="notVisible ui-widget-overlay ui-front" style="z-index: 99998;"></div>
 
         <div id="dialogWindow">
             <span id="dialogWindowContent"></span>
@@ -312,3 +364,4 @@
 </body>
 
 </html>
+<!-- <button class="btn  btn-primary me-4" onclick="javascript:showDialog()">Run</button>  -->

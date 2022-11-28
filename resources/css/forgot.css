@@ -146,10 +146,11 @@ td {
     color: #ffffff;
 }
 #recoveryPassword {
-    width: calc(100% - 150px) !important;
+    width: calc(100% - 130px) !important;
     margin-left: 30px;
     margin-top: -5px;
     float: left;
+	border-color: lightgrey;
 }
 #btnRecoveryUserPassword {
     margin-top: 10px;

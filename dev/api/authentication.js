@@ -2,6 +2,8 @@
 /**********************************
         Connect to API. Test Version 236A
 **********************************/
+let error_Text = "";
+
 function call_api_ajax(funcName, type, parameters = {}, async = true, callback = null, errorFunc = null, done = null, saveLocation = true) {
     if (
         parameters.SessionToken !== undefined &&
@@ -12,7 +14,7 @@ function call_api_ajax(funcName, type, parameters = {}, async = true, callback =
 
         window.location.href = '/login';
         return;
-    } else {
+    } else { 
         try {
             $.ajax({
                 url: API + funcName,
@@ -38,6 +40,7 @@ function call_api_ajax(funcName, type, parameters = {}, async = true, callback =
                 error: function(XMLHttpRequest) {
 
                     console.log("Error: ", XMLHttpRequest.responseJSON.Errors[0].Details)
+                    error_Text = XMLHttpRequest.responseJSON.Errors[0].Details;
                     let n = XMLHttpRequest.responseText.search(/Details/i);
                     if (location.pathname !== '/login' && saveLocation)
                         setSession(location.href, "path");
@@ -136,6 +139,7 @@ function call_api_ajax1(funcName, type, parameters = {}, async = true, callback 
                 error: function(XMLHttpRequest) {
 
                     console.log("Error: ", XMLHttpRequest.responseJSON.Errors[0].Details)
+                    error_Text = XMLHttpRequest.responseJSON.Errors[0].Details;
                     let n = XMLHttpRequest.responseText.search(/Details/i);
                     if (location.pathname !== '/login' && saveLocation)
                         setSession(location.href, "path");
@@ -214,15 +218,19 @@ function functionNotificationMessage(config) {
     $(elem).jqxNotification({
         autoOpen: true,
         autoClose: true,
-        autoCloseDelay: 3000,
+        autoCloseDelay: 4000,
         opacity: 1,
         position: config.position || 'top-left',
         template: config.type || 'success'
     });
 
     setTimeout(() => {
-        $('#jqxNotificationDefaultContainer-top-left').css('top', 'calc( 30% )').css('left', 'calc( 42% )').css('margin', 'auto').css('width', 'auto').css('font-family', 'Calibri').css('z-index', '99999')
-        $('.jqx-notification-content').css('font-size', '15px');
+        $('#jqxNotificationDefaultContainer-top-left').css('margin', 'auto').css('width', '250px').css('font-family', 'Calibri').css('z-index', '99999');
+        $('.jqx-notification-content').css('font-size', '15px').css('color','white'); 
+        $('.jqx-notification-warning').attr('style', 'background-color: red !important');
+        $('.jqx-notification.jqx-widget td').attr('style','color: white !important');
+        $('.jqx-notification-icon-warning').remove();
+        $('.jqx-notification-table').attr('style', 'background-color: red !important');
     }, 50);
 
     $(elem).on('close', function() {
@@ -231,10 +239,26 @@ function functionNotificationMessage(config) {
     });
 }
 
+var error_start= 0;
+
+function MessageShow(config) {
+   
+    var error = setInterval(() => {
+        if (error_start == 1 ) { 
+            functionNotificationMessage(config); 
+        }
+        else {
+            clearInterval(error);
+        }
+    }, 6000);
+    
+}
+
 /***********************
     session system
 ************************/
-function getSession(action = "sessionToken") {
+
+function getSession(action = "sessionToken") { 
     var sessionToken = getParameterByName('SessionToken');
     if (sessionToken == '') {
         $.ajax({
@@ -243,6 +267,20 @@ function getSession(action = "sessionToken") {
             data: { type: 'get', action: action },
             success: function(session) {
                 sessionToken = session;
+                error_start = 2;
+            },
+            error: function (error){ 
+                if(error_start == 0) {
+                    setTimeout(() => {
+                        var config = {
+                            text:  "session.php: " + error.status +" " + error.responseText,
+                            position : "top-left",
+                            type : "warning"
+                        }
+                        MessageShow(config); 
+                    }, 1000); 
+                } 
+                error_start = 1;
             },
             async: false
         });
@@ -253,11 +291,28 @@ function getSession(action = "sessionToken") {
     return sessionToken;
 }
 
+
 function setSession(sessionToken, action = "sessionToken", async = false) {
     $.ajax({
         url: MAINSITE + 'session.php',
         type: 'post',
         data: { type: 'set', value: sessionToken, action: action },
+        success: function(session) { 
+            error_start = 2;
+        },
+        error: function (error){
+            if(error_start == 0) {
+                setTimeout(() => {
+                    var config = {
+                        text:  "session.php: " + error.status +" " + error.responseText,
+                        position : "top-left",
+                        type : "warning"
+                    }
+                    MessageShow(config); 
+                }, 1000); 
+            } 
+            error_start = 1;
+        },
         async: async
     });
 }
@@ -298,7 +353,7 @@ function getParameterByName(name) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-function logout() {
+function logout() { 
     dialogWindow("Are you sure that you want to logout?", 'warning', 'confirm', null,
         () => {
             let session = getSession();
@@ -309,7 +364,7 @@ function logout() {
                     setCookie("remaining", 0);
                     setCookie("user_logout", 1);
                     localStorage["forget"] = 'password';
-
+                    setSession('', 'username_login' )
                     bc.postMessage({
                         path: 'profile',
                         active: 0,
@@ -365,7 +420,7 @@ function dialogWindow(msg, type = null, dialog = null, title = null, callback = 
         var userName = '',
             userRef = '',
             userCompany = '';
-
+ 
         /*call_api_ajax('GetMyAccountDetails', 'get', { SessionToken: getSession() }, false, ( data ) => {
             userName    = data.Result.Name;
             userRef     = data.Result.UserNumber;
@@ -556,10 +611,7 @@ function getUserName(st) {
 }
 
 function openLoginPopup() {
-    // if(getCookie("user_logout") != undefined && getCookie("user_logout") == 1){
-    //     window.location.href = '/login';
-    // }
-    // else{
+ 
     $('body').addClass('overlay');
     $('#loginPopup').jqxWindow('open');
     $('#loginPopup').jqxWindow({ position: "center" });
@@ -584,16 +636,15 @@ function openLoginPopup() {
 function calcuTimeFunc() {
     
     var error = false;
-    
-    var calcuRemaining = setInterval(() => {
-
+  
+    var calcuRemaining = setInterval(() => { 
         if (getCookie("remaining") >= 1000 ) { 
             if(location.href == "https://dev2.sarus.com/login" ) {
                 setCookie("remaining", 60000);
                 setSession(1, 'defaultMin' );
             }
             else {
-                try {
+                try { 
                     $.ajax({
                         url: API + "QuerySessionToken",
                         type: 'get',
@@ -656,8 +707,8 @@ function calcuTimeFunc() {
                     }
             }
         } 
-        else {
-            if (error == false && (getSession() != undefined && getSession() != "")) {
+        else {   
+            if (error == false) {
                 fetch(`${API}SessionTokenExpires?SessionToken=${getSession()}`)
                     .then(res => res.json())
                     .then(result => {
@@ -665,13 +716,18 @@ function calcuTimeFunc() {
                             remaining = result.Result.Remaining;
                         } else {
                             error = true;
+                            // setSession('', 'username_login' )
                             setCookie("remaining", 0);                       
                             setSession("");
+                            setSession(location.href, 'path');
+                            console.log(getSession('path'));
                             clearInterval(calcuRemaining);
+                            
                         }
                     })
                     .catch(e => console.warn("Token has already expired: ", e));
-            }
+            } 
+           
         }
     }, 1000);
 }

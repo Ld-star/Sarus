@@ -29,11 +29,11 @@
 	<link href="resources/jqwidgets/styles/jqx.base.css" rel="stylesheet">
 	<link href="resources/jqwidgets/styles/jqx.light.css" rel="stylesheet">
 	<link href="resources/idm-service/resources/css/main.css" rel="stylesheet">
-<!--
+
 	<link rel="stylesheet" href="resources/css/slick.grid.css" type="text/css" />
 	<link rel="stylesheet" href="resources/css/slick.pager.css" type="text/css" />
 	<link rel="stylesheet" href="resources/css/slick.columnpicker.css" type="text/css" />
--->
+
 	<link rel="stylesheet" href="dist/themes/default/style.min.css" />
 	<link rel="stylesheet" href="resources/css/monitor-gui.css" type="text/css" />
     <link rel="stylesheet" href="resources/css/monitor-ui.css" type="text/css" />
@@ -41,48 +41,26 @@
 	<!-- JS Files -->
 	<script src="resources/js/messages.js"></script>
 	<!-- <script src="resources/js/jquery-3.6.0.min.js"></script> -->
-	<script src="resources/idm-service/resources/js/jquery-1.12.3.js"></script>
+	<script src="resources/js/jquery-1.12.3.js"></script>
 
 	<script src="resources/idm-service/resources/js/bootstrap.min.js"></script>
 	<script src="resources/idm-service/resources/js/bootstrap-dropdown.js"></script>
 	<script src="resources/js/jquery-ui.js"></script>
 
-<!--
+
+
 	<script src="dist/jstree.min.js"></script>
 	<script src="resources/js/jquery.event.drag-2.3.0.js"></script>
 
-	
-	<script src="resources/jqwidgets/jqxcore.js"></script>
-	<script src="resources/jqwidgets/jqxwindow.js" async></script>
-	<script src="resources/jqwidgets/jqxsplitter.js" async></script>
-	<script src="resources/jqwidgets/jqxexpander.js" async></script>
-	<script src="resources/jqwidgets/jqxpopover.js" async></script>
-	<script src="resources/jqwidgets/jqxbuttons.js" async></script>
-	<script src="resources/jqwidgets/jqxscrollbar.js" async></script>
-	<script src="resources/jqwidgets/jqxinput.js" async></script>
-    <script src="resources/jqwidgets/jqxlistbox.js" async></script>
-    <script src="resources/jqwidgets/jqxdropdownlist.js" async></script>
-	<script src="resources/jqwidgets/jqxmenu.js" async></script>
-	<script src="resources/jqwidgets/jqxcheckbox.js" async></script>
 
-	<script src="resources/js/slick.core.js"></script>
-	<script src="resources/js/slick.formatters.js" async></script>
-	<script src="resources/js/slick.editors.js"> async</script>
-	<script src="resources/js/slick.rowselectionmodel.js" async></script>
-	<script src="resources/js/slick.grid.js" async></script>
-	<script src="resources/js/slick.dataview.js" async></script>
-	<script src="resources/js/slick.cellrangeselector.js" async></script>
-	<script src="resources/js/slick.cellselectionmodel.js" async></script>
-	<script src="resources/js/slick.rowmovemanager.js" async></script>
-  	<script src="resources/js/slick.checkboxselectcolumn.js" async></script>
-	-->
+	
 	<script src="dev/api/authentication.js"></script>
 	<script src="dev/api/user_favorites.js"></script>
 	<script src="dev/api/config/config.js"></script>
 	<script src="dev/api/utils/utils.js"></script>
 	<script src="resources/js/jquery.ihavecookies.min.js"></script>
 	<script src="resources/js/top-menu.js"></script>
-	<!-- <script src="resources/js/home.js"></script> -->
+	
 	
 	<script src="resources/js/goto_homepage.js"></script>
 	<script defer src="resources/js/contact.js"></script>
@@ -98,7 +76,7 @@
 
 		.main-content {
 			background: #fff;
-			margin-top: 50px;
+			padding-top: 50px;
 		}
 
 		@media screen and (max-width:991px) {
@@ -111,6 +89,12 @@
 </head>
 
 <body>
+	<div id="messageNotification">
+        <div id="message_text">
+            
+        </div>
+    </div>
+	
 	<div class="fixpage">
 
 		<nav include-html="menu.html" id="menu_file" class="navbar navbar-default navbar-fixed-top "></nav>
@@ -209,7 +193,7 @@
 
 									<div class="form-group">
 										<label class="main-label">Company</label>
-										<input name="companyName" id="companyName" type="text" class="form-control">
+										<input name="companyName" id="companyName" required type="text" class="form-control">
 									</div>
 
 									<div class="form-group">
@@ -225,13 +209,13 @@
 
 									<div class="form-group">
 										<label class="main-label">Phone</label>
-										<input name="telephone" id="telephone" type="text" class="form-control">
+										<input name="telephone" id="telephone" required type="text" class="form-control">
 									</div>
 
 									<div class="form-group">
 										<label class="main-label">Message <sup class="mandatory">*</sup></label>
-										<textarea name="comment" id="comment" required cols="" rows="5"
-											class="form-control"></textarea>
+										<textarea name="comment" id="comment"   cols="" rows="5"
+											minlength="16" class="form-control" required  ></textarea>
 									</div>
 
 									<div class="form-group">

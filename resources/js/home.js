@@ -19,446 +19,10 @@ function getCookie(cname) {
         }
     }
     return "";
-}
-
+} 
 $(document).ready(function() {
-    var report_grid, report_dataView;
-
-    var sessionToken = getParameterByName('SessionToken');
-    if (sessionToken !== "") {
-        window.location.href = 'profilemain?tab=favorites';
-    } else {
-        $('.fixpage').show();
-    }
-
-    function isIEPreVer9() { var v = navigator.appVersion.match(/MSIE ([\d.]+)/i); return (v ? v[1] < 9 : false); }
-
-    $('#reportBackups').jqxWindow({
-        showCollapseButton: false,
-        resizable: true,
-        isModal: false,
-        height: '650px',
-        width: '805px',
-        maxHeight: '100%',
-        maxWidth: '100%',
-        autoOpen: false,
-        title: 'Open a WebXL Market Data Report'
-    });
-
-    var reportCreatorWidth = 890;
-    var reportCreatorHeight = 735;
-    var reportCreatorMinWidth = 450;
-    var reportCreatorMinHeight = 400;
-    if (parseInt($(window).width()) < 890 || parseInt($(window).height()) < 735) {
-        reportCreatorWidth = "90%";
-        reportCreatorHeight = "90%";
-
-        reportCreatorMinWidth = parseInt($(window).width()) * 0.9;
-        reportCreatorMinHeight = parseInt($(window).height()) * 0.9;
-    }
-
-    $('#reportCreator').jqxWindow({
-        showCollapseButton: false,
-        resizable: true,
-        isModal: false,
-        height: reportCreatorHeight,
-        width: reportCreatorWidth,
-        minHeight: reportCreatorMinHeight,
-        minWidth: reportCreatorMinWidth,
-        maxHeight: '2000px',
-        maxWidth: '2500px',
-        autoOpen: false,
-        // title: 'Load Market Data',
-        title: 'Select Market Data for the Report',
-        showCloseButton: false,
-        keyboardCloseKey: 'none',
-    });
-
-    // $('#batesListPopup').jqxWindow({
-    //     showCollapseButton: false,
-    //     resizable: false,
-    //     isModal: false,
-    //     height: 300,
-    //     width: 400,
-    //     autoOpen: false,
-    //     // title: 'Load Market Data',
-    //     title: 'Select Columns to Display',
-    // });
-
-    $("#reportCreator .jqx-window-header").append("<input id='closeBtn' style='background-color: #f3f3f3 !important; top:10px; right:12px'/>");
-
-    $('#loginPopup').jqxWindow({
-        showCollapseButton: false,
-        resizable: true,
-        isModal: false,
-        height: '420px',
-        width: '370px',
-        maxHeight: '100%',
-        maxWidth: '100%',
-        autoOpen: false,
-        title: 'Quick Login'
-    });
-
-    $("#re_referenceNumber").jqxInput({
-        // placeHolder: "Enter filter text",
-        height: 30,
-        width: "100%"
-    });
-
-    $("#re_username").jqxInput({
-        // placeHolder: "Enter filter text",
-        height: 30,
-        width: "100%"
-    });
-
-    $("#re_password").jqxInput({    
-        // placeHolder: "Enter filter text",
-        height: 30,
-        width: "100%"
-    });
-
-     if (getSession('defaultMin') != undefined && getSession('defaultMin') != null && getSession('defaultMin') > 0) {
-        var defaultMin = getSession('defaultMin');
-     }else {
-        var defaultMin = 1;
-    }
-
-    var time_json = [{
-            name: 'Default',
-            value: parseFloat(defaultMin / 60)
-        },
-        {
-            name: '.5',
-            value: 0.5
-        },
-        {
-            name: '1',
-            value: 1
-        },
-        {
-            name: '2',
-            value: 2
-        },
-        {
-            name: '3',
-            value: 3
-        },
-        {
-            name: '6',
-            value: 6
-        },
-        {
-            name: '12',
-            value: 12
-        }
-    ];
-
-    var password = "";
-    var liveTime = 60;
-
-    $("#liveTime").jqxDropDownList({
-        source: time_json,
-        displayMember: "name",
-        valueMember: "value",
-        height: 22,
-        placeHolder: "Average",
-        selectedIndex: 0,
-        width: 68,
-        dropDownHeight: 155
-    });
-
-    $("#liveTime").on('change', function(event) {
-        var args = event.args;
-        if (args) {
-            var index = args.index;
-            if (index == 0) {
-                $("#liveTimeLabel").hide();
-            } else {
-                $("#liveTimeLabel").show();
-            }
-        }
-    });
-
-    if (getCookie("remember-id") == "true")
-        $('#re_referenceNumber').val(getCookie("id"));
-
-    if (getCookie("remember-username") == "true")
-        $('#re_username').val(getCookie("username"));
-
-    if (getSession("password") !== null && getCookie('remember-password') == "true") {
-        $.ajax({
-            url: 'encrypt.php',
-            type: 'post',
-            data: { password: getSession("password"), type: 'decrypt' },
-            success: function(passwordDec) {
-                password = window.atob(passwordDec);
-                $('#re_password').val(password);
-            },
-            error: function(XMLHttpRequest) {
-                let error = XMLHttpRequest.responseJSON.Errors;
-                error.Details = (error.Details == "") ? XMLHttpRequest.statusText : error.Details;
-
-                let errorMsg = String(error.Details);
-                errorMsg = (errorMsg.indexOf('Trace') !== -1) ? errorMsg.split('Trace:')[1] : errorMsg;
-
-                dialogWindow("The request returned error " + error.Status + ". ( " + errorMsg + " )", "error");
-                throw (errorMsg + ' ' + error.Status);
-            },
-            async: false
-        });
-    }
-    $('#btnLoadLogin').click(function() {
-        if ($("#re_referenceNumber").val() == "") {
-            functionNotificationMessage({
-                text: 'Please insert Reference No',
-                type: 'error'
-            });
-            $("#re_referenceNumber").focus();
-            return false;
-        }
-        if ($("#re_username").val() == "") {
-            functionNotificationMessage({
-                text: 'Please insert User Name',
-                type: 'error'
-            });
-            $("#re_username").focus();
-            return false;
-        }
-        if ($("#re_password").val() == "") {
-            functionNotificationMessage({
-                text: 'Please insert Password',
-                type: 'error'
-            });
-            $("#re_password").focus();
-            return false;
-        }
-
-        password = $('#re_password').val();
-        liveTime = parseFloat($("#liveTime").jqxDropDownList('val')) * 60;
-        console.log(liveTime);
-        var dataP = {
-            UserReferenceNo: $('#re_referenceNumber').val(),
-            Username: $('#re_username').val(),
-            Password: password,
-            Minutes: liveTime
-        };
-
-        call_api_ajax('GetSessionToken', 'get', dataP, true, (data) => {
-            var path = "profilemain?tab=favorites",
-                lastPath = getSession("path");
-
-            if (lastPath !== "" && lastPath !== null && lastPath !== undefined && !lastPath.includes('login'))
-                path = lastPath;
-
-            $.ajax({
-                url: 'encrypt.php',
-                type: 'post',
-                data: { password: window.btoa(password), type: 'encrypt' },
-                success: function(password) {
-                    setSession(data.Result.SessionToken);
-                    setSession(path, "path");
-
-                    bc.postMessage({
-                        path: 'profile',
-                        active: 1,
-                        SessionToken: data.Result.SessionToken
-                    });
-
-                    call_api_ajax('ReadUserJSONSettings', 'get', { SessionToken: data.Result.SessionToken }, false, (data) => {
-                        data = JSON.parse(data.Result);
-                        if (data !== undefined) {
-                            setCookie('remember-id', data.Credentials.UserRef);
-                            setCookie('remember-username', data.Credentials.UserName);
-                            setCookie("remember-password", data.Credentials.Password);
-                            setCookie("remember-checkbox", data.Credentials.Confirm);
-
-                            if (data.Credentials.UserRef == true) setCookie('id', dataP.UserReferenceNo);
-                            if (data.Credentials.UserName == true) setCookie('username', dataP.Username);
-                            if (data.Credentials.Password == true) setSession(password, "password");
-
-                            setCookie("remaining", 60000);
-                            setSession( 1,'defaultMin');
-                            calcuTimeFunc();
-                        }
-                    });
-
-                    $('#loginPopup').jqxWindow('close');
-                    // return sessionToken = data.Result.SessionToken;
-                    // window.location.href = path;
-                },
-                error: function(XMLHttpRequest) {
-                    let error = XMLHttpRequest.responseJSON.Errors;
-                    error.Details = (error.Details == "") ? XMLHttpRequest.statusText : error.Details;
-
-                    let errorMsg = String(error.Details);
-                    errorMsg = (errorMsg.indexOf('Trace') !== -1) ? errorMsg.split('Trace:')[1] : errorMsg;
-
-                    dialogWindow("The request returned error " + error.Status + ". ( " + errorMsg + " )", "error");
-                    throw (errorMsg + ' ' + error.Status);
-                },
-                async: false
-            });
-        }, () => {
-            dialogWindow("You have entered an invalid account number, username or password.<br>Please check and try again or use the 'Forgot Password' link below.", "error");
-            return false;
-        }, null, false);
-    });
-    $('#login_name').mousedown(function() {
-        if ($("#re_referenceNumber").val() == "") {
-            functionNotificationMessage({
-                text: 'Please insert Reference No',
-                type: 'error'
-            });
-            $("#re_referenceNumber").focus();
-            return false;
-        }
-        if ($("#re_username").val() == "") {
-            functionNotificationMessage({
-                text: 'Please insert User Name',
-                type: 'error'
-            });
-            $("#re_username").focus();
-            return false;
-        }
-        if ($("#re_password").val() == "") {
-            functionNotificationMessage({
-                text: 'Please insert Password',
-                type: 'error'
-            });
-            $("#re_password").focus();
-            return false;
-        }
-
-        password = $('#re_password').val();
-        liveTime = parseFloat($("#liveTime").jqxDropDownList('val')) * 60;
-        console.log(liveTime);
-        var dataP = {
-            UserReferenceNo: $('#re_referenceNumber').val(),
-            Username: $('#re_username').val(),
-            Password: password,
-            Minutes: liveTime
-        };
-
-        call_api_ajax('GetSessionToken', 'get', dataP, true, (data) => {
-            var path = "profilemain?tab=favorites",
-                lastPath = getSession("path");
-
-            if (lastPath !== "" && lastPath !== null && lastPath !== undefined && !lastPath.includes('login'))
-                path = lastPath;
-
-            $.ajax({
-                url: 'encrypt.php',
-                type: 'post',
-                data: { password: window.btoa(password), type: 'encrypt' },
-                success: function(password) {
-                    setSession(data.Result.SessionToken);
-                    setSession(path, "path");
-
-                    bc.postMessage({
-                        path: 'profile',
-                        active: 1,
-                        SessionToken: data.Result.SessionToken
-                    });
-
-                    call_api_ajax('ReadUserJSONSettings', 'get', { SessionToken: data.Result.SessionToken }, false, (data) => {
-                        data = JSON.parse(data.Result);
-                        if (data !== undefined) {
-                            setCookie('remember-id', data.Credentials.UserRef);
-                            setCookie('remember-username', data.Credentials.UserName);
-                            setCookie("remember-password", data.Credentials.Password);
-                            setCookie("remember-checkbox", data.Credentials.Confirm);
-
-                            if (data.Credentials.UserRef == true) setCookie('id', dataP.UserReferenceNo);
-                            if (data.Credentials.UserName == true) setCookie('username', dataP.Username);
-                            if (data.Credentials.Password == true) setSession(password, "password");
-
-                            setCookie("remaining", 60000);
-                            setSession( 1,'defaultMin');
-                            calcuTimeFunc();
-                        }
-                    });
-
-                    $('#loginPopup').jqxWindow('close');
-                    // return sessionToken = data.Result.SessionToken;
-                    // window.location.href = path;
-                },
-                error: function(XMLHttpRequest) {
-                    let error = XMLHttpRequest.responseJSON.Errors;
-                    error.Details = (error.Details == "") ? XMLHttpRequest.statusText : error.Details;
-
-                    let errorMsg = String(error.Details);
-                    errorMsg = (errorMsg.indexOf('Trace') !== -1) ? errorMsg.split('Trace:')[1] : errorMsg;
-
-                    dialogWindow("The request returned error " + error.Status + ". ( " + errorMsg + " )", "error");
-                    throw (errorMsg + ' ' + error.Status);
-                },
-                async: false
-            });
-        }, () => {
-            dialogWindow("You have entered an invalid account number, username or password.<br>Please check and try again or use the 'Forgot Password' link below.", "error");
-            return false;
-        }, null, false);
-    });
-    $('#loginPopup').on('close', function() {
-        if ($('#reportBackups').jqxWindow('isOpen') == false) {
-            $('body').removeClass('overlay');
-        }
-    });
-
-    $('#batesListPopup').on('dialogclose', function() {
-        $(".ui-dialog").css("padding", "0.2em");
-        $(".ui-dialog-titlebar").css("background-color", "unset");
-        $(".ui-dialog-title").css("color", "#666").css("font-weight", "bold").css("padding-left", "0px").css("background", "unset").css("margin-left", "0px");
-        $(".ui-dialog .ui-dialog-buttonpane").css("border-top", "1px solid #ddd");
-    });
-
-    $('#btnCancelLogin').jqxButton({
-        width: '65px',
-        height: '35px',
-        textPosition: "center"
-    });
-
-    $('#btnCancelLogin span').css('left', 14).css('top', 9);
-
-    $('#btnCancelLogin').on('click', function() {
-        // window.location.href = '/login';
-        $('#loginPopup').jqxWindow('close');
-    });
-
-    $("#loginPopup").css("min-width", 365).css("min-height", 409);
-
-    $('#loginPopup').on('resized', function(event) {
-        $('#loginPopup .jqx-window-content').css("width", "calc(100% - 8px)").css("overflow", "unset");
-        $('#loginPopup #login-container').css("height", parseInt($('#loginPopup').height()) - 122);
-    });
-
-    var session = getSession();
-    
-    if (session !== null && session !== "" && session !== undefined) {
-        call_api_ajax('SessionTokenExpires', 'get', { SessionToken: session }, false, () => {
-                // Get user data and check if session is not Expired
-                call_api_ajax('GetMyAccountDetails', 'get', { SessionToken: session }, true, (data) => {
-                        username = data.Result.Name;
-                        $('#login_name').text(username);
-                        $('#username').text(username);
-                        $('#profile').attr('href', 'profile?tab=MyProfile');
-                        $('#favorites').attr('href', 'profilemain?tab=favorites');
-                        $('#logout').click(function() {
-                            logout();
-                        });
-                        $('.non-login').hide();
-                        $('.home-menu').show();
-                    },
-                    () => {
-                        return false;
-                    }, null, false);
-            },
-            () => {
-                $('.home-menu').hide();
-                $('.non-login').show();
-                return false;
-            }, null, false);
-
+    var session = getSession(); 
+    if (session !== null && session !== "" && session !== undefined) { 
         var columnData = function(row, columnfield, value, defaulthtml, columnproperties) {
             return (value) ? '<div align="center"><img height="16" width="16" class="columnData" src="../../../icons/login.png"></div>' : '';
         }
@@ -779,7 +343,7 @@ $(document).ready(function() {
                                     $('#reportCreator .jqx-window-header div').css("float", "none");
                                     $('#reportCreator').jqxWindow('focus');
 
-                                    $('#reportCreator .jqx-window-header').css("height", "30px").css("background-color", "#3a79d7");
+                                    $('#reportCreator .jqx-window-header').css("height", "30px").css("background-color", "#3a79d7").css("width", "calc(100% - 30px)");;
                                     $('#reportCreator .jqx-window-content').css("width", "calc(100%)").css("overflow", "unset");
 
                                     $('#reportCreatorSplitter').css("height", "calc(100% - 58px)");
@@ -1312,4 +876,417 @@ $(document).ready(function() {
         $('.home-menu').hide();
         $('.non-login').show();
     }
+
+    var report_grid, report_dataView;
+
+    var sessionToken = getParameterByName('SessionToken');
+    if (sessionToken !== "") {
+        window.location.href = 'profilemain?tab=favorites';
+    } else {
+        $('.fixpage').show();
+    }
+
+    function isIEPreVer9() { var v = navigator.appVersion.match(/MSIE ([\d.]+)/i); return (v ? v[1] < 9 : false); }
+
+    
+    $('#reportBackups').jqxWindow({
+        showCollapseButton: false,
+        resizable: true,
+        isModal: false,
+        height: '650px',
+        width: '805px',
+        maxHeight: '100%',
+        maxWidth: '100%',
+        autoOpen: false,
+        title: 'Open a WebXL Market Data Report'
+    });
+
+    var reportCreatorWidth = 890;
+    var reportCreatorHeight = 735;
+    var reportCreatorMinWidth = 450;
+    var reportCreatorMinHeight = 400;
+    if (parseInt($(window).width()) < 890 || parseInt($(window).height()) < 735) {
+        reportCreatorWidth = "90%";
+        reportCreatorHeight = "90%";
+
+        reportCreatorMinWidth = parseInt($(window).width()) * 0.9;
+        reportCreatorMinHeight = parseInt($(window).height()) * 0.9;
+    }
+
+    $('#reportCreator').jqxWindow({
+        showCollapseButton: false,
+        resizable: true,
+        isModal: false,
+        height: reportCreatorHeight,
+        width: reportCreatorWidth,
+        minHeight: reportCreatorMinHeight,
+        minWidth: reportCreatorMinWidth,
+        maxHeight: '2000px',
+        maxWidth: '2500px',
+        autoOpen: false,
+        // title: 'Load Market Data',
+        title: 'Select Market Data for the Report',
+        showCloseButton: false,
+        keyboardCloseKey: 'none',
+    });
+
+    // $('#batesListPopup').jqxWindow({
+    //     showCollapseButton: false,
+    //     resizable: false,
+    //     isModal: false,
+    //     height: 300,
+    //     width: 400,
+    //     autoOpen: false,
+    //     // title: 'Load Market Data',
+    //     title: 'Select Columns to Display',
+    // });
+
+    $("#reportCreator .jqx-window-header").append("<input id='closeBtn' style='background-color: #f3f3f3 !important; top:10px; right:12px'/>");
+
+    $('#loginPopup').jqxWindow({
+        showCollapseButton: false,
+        resizable: true,
+        isModal: false,
+        height: '420px',
+        width: '370px',
+        maxHeight: '100%',
+        maxWidth: '100%',
+        autoOpen: false,
+        title: 'Quick Login'
+    });
+
+    $("#re_referenceNumber").jqxInput({
+        // placeHolder: "Enter filter text",
+        height: 30,
+        width: "100%"
+    });
+
+    $("#re_username").jqxInput({
+        // placeHolder: "Enter filter text",
+        height: 30,
+        width: "100%"
+    });
+
+    $("#re_password").jqxInput({    
+        // placeHolder: "Enter filter text",
+        height: 30,
+        width: "100%"
+    });
+
+     if (getSession('defaultMin') != undefined && getSession('defaultMin') != null && getSession('defaultMin') > 0) {
+        var defaultMin = getSession('defaultMin');
+     }else {
+        var defaultMin = 1;
+    }
+
+    var time_json = [{
+            name: 'Default',
+            value: parseFloat(defaultMin / 60)
+        },
+        {
+            name: '.5',
+            value: 0.5
+        },
+        {
+            name: '1',
+            value: 1
+        },
+        {
+            name: '2',
+            value: 2
+        },
+        {
+            name: '3',
+            value: 3
+        },
+        {
+            name: '6',
+            value: 6
+        },
+        {
+            name: '12',
+            value: 12
+        }
+    ];
+
+    var password = "";
+    var liveTime = 60;
+
+    $("#liveTime").jqxDropDownList({
+        source: time_json,
+        displayMember: "name",
+        valueMember: "value",
+        height: 22,
+        placeHolder: "Average",
+        selectedIndex: 0,
+        width: 68,
+        dropDownHeight: 155
+    });
+
+    $("#liveTime").on('change', function(event) {
+        var args = event.args;
+        if (args) {
+            var index = args.index;
+            if (index == 0) {
+                $("#liveTimeLabel").hide();
+            } else {
+                $("#liveTimeLabel").show();
+            }
+        }
+    });
+
+    if (getCookie("remember-id") == "true")
+        $('#re_referenceNumber').val(getCookie("id"));
+
+    if (getCookie("remember-username") == "true")
+        $('#re_username').val(getCookie("username"));
+
+    if (getSession("password") !== null && getCookie('remember-password') == "true") {
+        $.ajax({
+            url: 'encrypt.php',
+            type: 'post',
+            data: { password: getSession("password"), type: 'decrypt' },
+            success: function(passwordDec) {
+                password = window.atob(passwordDec);
+                $('#re_password').val(password);
+            },
+            error: function(XMLHttpRequest) {
+                let error = XMLHttpRequest.responseJSON.Errors;
+                error.Details = (error.Details == "") ? XMLHttpRequest.statusText : error.Details;
+
+                let errorMsg = String(error.Details);
+                errorMsg = (errorMsg.indexOf('Trace') !== -1) ? errorMsg.split('Trace:')[1] : errorMsg;
+
+                dialogWindow("The request returned error " + error.Status + ". ( " + errorMsg + " )", "error");
+                throw (errorMsg + ' ' + error.Status);
+            },
+            async: false
+        });
+    }
+    $('#btnLoadLogin').click(function() {
+        if ($("#re_referenceNumber").val() == "") {
+            functionNotificationMessage({
+                text: 'Please insert Reference No',
+                type: 'error'
+            });
+            $("#re_referenceNumber").focus();
+            return false;
+        }
+        if ($("#re_username").val() == "") {
+            functionNotificationMessage({
+                text: 'Please insert User Name',
+                type: 'error'
+            });
+            $("#re_username").focus();
+            return false;
+        }
+        if ($("#re_password").val() == "") {
+            functionNotificationMessage({
+                text: 'Please insert Password',
+                type: 'error'
+            });
+            $("#re_password").focus();
+            return false;
+        }
+
+        password = $('#re_password').val();
+        liveTime = parseFloat($("#liveTime").jqxDropDownList('val')) * 60;
+        console.log(liveTime);
+        var dataP = {
+            UserReferenceNo: $('#re_referenceNumber').val(),
+            Username: $('#re_username').val(),
+            Password: password,
+            Minutes: liveTime
+        };
+
+        call_api_ajax('GetSessionToken', 'get', dataP, true, (data) => {
+            var path = "profilemain?tab=favorites",
+                lastPath = getSession("path");
+
+            if (lastPath !== "" && lastPath !== null && lastPath !== undefined && !lastPath.includes('login'))
+                path = lastPath;
+
+            $.ajax({
+                url: 'encrypt.php',
+                type: 'post',
+                data: { password: window.btoa(password), type: 'encrypt' },
+                success: function(password) {
+                    setSession(data.Result.SessionToken);
+                    setSession(path, "path");
+
+                    bc.postMessage({
+                        path: 'profile',
+                        active: 1,
+                        SessionToken: data.Result.SessionToken
+                    });
+
+                    call_api_ajax('ReadUserJSONSettings', 'get', { SessionToken: data.Result.SessionToken }, false, (data) => {
+                        data = JSON.parse(data.Result);
+                        if (data !== undefined) {
+                            setCookie('remember-id', data.Credentials.UserRef);
+                            setCookie('remember-username', data.Credentials.UserName);
+                            setCookie("remember-password", data.Credentials.Password);
+                            setCookie("remember-checkbox", data.Credentials.Confirm);
+
+                            if (data.Credentials.UserRef == true) setCookie('id', dataP.UserReferenceNo);
+                            if (data.Credentials.UserName == true) setCookie('username', dataP.Username);
+                            if (data.Credentials.Password == true) setSession(password, "password");
+
+                            setCookie("remaining", 60000);
+                            setSession( 1,'defaultMin');
+                            calcuTimeFunc();
+                        }
+                    });
+
+                    $('#loginPopup').jqxWindow('close');
+                    // return sessionToken = data.Result.SessionToken;
+                    // window.location.href = path;
+                },
+                error: function(XMLHttpRequest) {
+                    let error = XMLHttpRequest.responseJSON.Errors;
+                    error.Details = (error.Details == "") ? XMLHttpRequest.statusText : error.Details;
+
+                    let errorMsg = String(error.Details);
+                    errorMsg = (errorMsg.indexOf('Trace') !== -1) ? errorMsg.split('Trace:')[1] : errorMsg;
+
+                    dialogWindow("The request returned error " + error.Status + ". ( " + errorMsg + " )", "error");
+                    throw (errorMsg + ' ' + error.Status);
+                },
+                async: false
+            });
+        }, () => {
+            dialogWindow("You have entered an invalid account number, username or password.<br>Please check and try again or use the 'Forgot Password' link below.", "error");
+            return false;
+        }, null, false);
+    });
+    $('#login_name').mousedown(function() {
+        if ($("#re_referenceNumber").val() == "") {
+            functionNotificationMessage({
+                text: 'Please insert Reference No',
+                type: 'error'
+            });
+            $("#re_referenceNumber").focus();
+            return false;
+        }
+        if ($("#re_username").val() == "") {
+            functionNotificationMessage({
+                text: 'Please insert User Name',
+                type: 'error'
+            });
+            $("#re_username").focus();
+            return false;
+        }
+        if ($("#re_password").val() == "") {
+            functionNotificationMessage({
+                text: 'Please insert Password',
+                type: 'error'
+            });
+            $("#re_password").focus();
+            return false;
+        }
+
+        password = $('#re_password').val();
+        liveTime = parseFloat($("#liveTime").jqxDropDownList('val')) * 60;
+        console.log(liveTime);
+        var dataP = {
+            UserReferenceNo: $('#re_referenceNumber').val(),
+            Username: $('#re_username').val(),
+            Password: password,
+            Minutes: liveTime
+        };
+
+        call_api_ajax('GetSessionToken', 'get', dataP, true, (data) => {
+            var path = "profilemain?tab=favorites",
+                lastPath = getSession("path");
+
+            if (lastPath !== "" && lastPath !== null && lastPath !== undefined && !lastPath.includes('login'))
+                path = lastPath;
+
+            $.ajax({
+                url: 'encrypt.php',
+                type: 'post',
+                data: { password: window.btoa(password), type: 'encrypt' },
+                success: function(password) {
+                    setSession(data.Result.SessionToken);
+                    setSession(path, "path");
+
+                    bc.postMessage({
+                        path: 'profile',
+                        active: 1,
+                        SessionToken: data.Result.SessionToken
+                    });
+
+                    call_api_ajax('ReadUserJSONSettings', 'get', { SessionToken: data.Result.SessionToken }, false, (data) => {
+                        data = JSON.parse(data.Result);
+                        if (data !== undefined) {
+                            setCookie('remember-id', data.Credentials.UserRef);
+                            setCookie('remember-username', data.Credentials.UserName);
+                            setCookie("remember-password", data.Credentials.Password);
+                            setCookie("remember-checkbox", data.Credentials.Confirm);
+
+                            if (data.Credentials.UserRef == true) setCookie('id', dataP.UserReferenceNo);
+                            if (data.Credentials.UserName == true) setCookie('username', dataP.Username);
+                            if (data.Credentials.Password == true) setSession(password, "password");
+
+                            setCookie("remaining", 60000);
+                            setSession( 1,'defaultMin');
+                            calcuTimeFunc();
+                        }
+                    });
+
+                    $('#loginPopup').jqxWindow('close');
+                    // return sessionToken = data.Result.SessionToken;
+                    // window.location.href = path;
+                },
+                error: function(XMLHttpRequest) {
+                    let error = XMLHttpRequest.responseJSON.Errors;
+                    error.Details = (error.Details == "") ? XMLHttpRequest.statusText : error.Details;
+
+                    let errorMsg = String(error.Details);
+                    errorMsg = (errorMsg.indexOf('Trace') !== -1) ? errorMsg.split('Trace:')[1] : errorMsg;
+
+                    dialogWindow("The request returned error " + error.Status + ". ( " + errorMsg + " )", "error");
+                    throw (errorMsg + ' ' + error.Status);
+                },
+                async: false
+            });
+        }, () => {
+            dialogWindow("You have entered an invalid account number, username or password.<br>Please check and try again or use the 'Forgot Password' link below.", "error");
+            return false;
+        }, null, false);
+    });
+    $('#loginPopup').on('close', function() {
+        if ($('#reportBackups').jqxWindow('isOpen') == false) {
+            $('body').removeClass('overlay');
+        }
+    });
+
+    $('#batesListPopup').on('dialogclose', function() {
+        $(".ui-dialog").css("padding", "0.2em");
+        $(".ui-dialog-titlebar").css("background-color", "unset");
+        $(".ui-dialog-title").css("color", "#666").css("font-weight", "bold").css("padding-left", "0px").css("background", "unset").css("margin-left", "0px");
+        $(".ui-dialog .ui-dialog-buttonpane").css("border-top", "1px solid #ddd");
+    });
+
+    $('#btnCancelLogin').jqxButton({
+        width: '65px',
+        height: '35px',
+        textPosition: "center"
+    });
+
+    $('#btnCancelLogin span').css('left', 14).css('top', 9);
+
+    $('#btnCancelLogin').on('click', function() {
+        // window.location.href = '/login';
+        $('#loginPopup').jqxWindow('close');
+    });
+
+    $("#loginPopup").css("min-width", 365).css("min-height", 409);
+
+    $('#loginPopup').on('resized', function(event) {
+        $('#loginPopup .jqx-window-content').css("width", "calc(100% - 8px)").css("overflow", "unset");
+        $('#loginPopup #login-container').css("height", parseInt($('#loginPopup').height()) - 122);
+    });
+
+    
 });

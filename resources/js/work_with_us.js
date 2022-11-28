@@ -9,7 +9,6 @@ let CompanyName=document.querySelector("#CompanyName");
 let succes_form=document.querySelector("#form-success");
 let form_checkbox=document.querySelector("#check");
 let check_error=document.querySelector(".check-error");
-let select_error=document.querySelector(".select-error");
 
 let errors_text=document.querySelectorAll(".error-text")
 
@@ -56,7 +55,6 @@ $(function(){
           var texti = randomNr1+" + "+randomNr2 + " = ";
           $('#ebcaptchatext').text(texti);
           
-      
           $(input).keyup(function(){
   
               var nr = $(this).val();
@@ -91,7 +89,7 @@ form.addEventListener("submit",(e)=>{
     e.preventDefault();
     let interestesOption_value=document.querySelector("#interestedOption").value;
     console.log(interestesOption_value);
-    if(fname.value.length<3 || CompanyName.value.length<3 || text.value.length<10 || !form_checkbox.checked || !recaptch_index || interestesOption_value == "Interested Option" ){
+    if(fname.value.length<3 || CompanyName.value.length<3 || text.value.length<10 || !form_checkbox.checked || !recaptch_index || interestesOption_value == null ){
 
         if(recaptch_index == 0)
         {
@@ -102,19 +100,13 @@ form.addEventListener("submit",(e)=>{
         else{
             $('[data-toggle="popover"]').popover('hide'); 
         }
-        if(interestesOption_value == "Interested Option") {
-            select_error.style = 'display: block';
-        }
-        else {
-            select_error.style = 'display: none';
-        }
      }
      else{
         let name_Value=document.querySelector("#name").value;
         let CompanyName_Value=document.querySelector("#CompanyName").value;
         let email=document.querySelector("#email").value;
         let Message=document.getElementById("message").value;
-        let interestesOption_value=document.querySelector("#interestedOption").value;
+        let interestesOption_value = document.querySelector("#interestedOption").value;
 
             var data = { 
                 m_name: name_Value,
@@ -152,7 +144,7 @@ form.addEventListener("submit",(e)=>{
                             body_type: 'text'
                         },
                         success: function(data) {
-                            dialogWindow('Thank you. The message has been sent.', "information");
+                            dialogWindow('Thank you. Your message has been sent successfully.', "information");
                             form.reset();
                         },
                         error:function(jqx,text,error)
@@ -160,12 +152,11 @@ form.addEventListener("submit",(e)=>{
                             let e;
                             if(jqx.responseJSON != undefined) e = jqx.responseJSON.error;
                             else e = error;
-                            dialogWindow("Error in sending request: "+e, "error");
-                            // alert("error in sending request")
+                            dialogWindow("The Send request failed with the error: "+e, "error");
                         },
                     success: function ( res )
                     {
-                        dialogWindow('Thank you. The message has been sent.', "information");
+                        dialogWindow('Thank you. Your message has been sent successfully.', "information");
                         // $('.form-control').val('');
                         // alert("Thank you for your message. We'll be in touch shortly.");
                         form.reset();
@@ -176,3 +167,7 @@ form.addEventListener("submit",(e)=>{
     
 })
 
+function getlistname(val) {
+    document.getElementById('interestedOption').value = val;
+    document.getElementById('drop_btn').innerHTML = val;
+  }

@@ -1,7 +1,10 @@
 /* Sticky footer styles
 -------------------------------------------------- */
 
-
+.banner-section {
+	margin-top: 0px !important;
+    padding-top: 101px !important;
+}
 body {
 	background: #ececec;
 }
@@ -2196,10 +2199,11 @@ img {
 	border: 1px solid #dbdbdb;
 	border-radius: 0;
 	font-size: 18px;
+	color: #555555;
 }
 .label_C{
 	width: 200px;
 	margin: 9px 2px 3px 12px;
 	font-size: 22px;
+	user-select: none !important;
 }
- 

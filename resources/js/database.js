@@ -181,12 +181,12 @@ let form=document.querySelector("form");
             	    let e;
                             if(jqx.responseJSON != undefined) e = jqx.responseJSON.error;
                             else e = error;
-                                    dialogWindow("Error in sending request: "+e, "error");
-                                    alert("error in sending request")
+                                    dialogWindow("The Send request failed with the error: "+e, "error");
+                                    //alert("error in sending request")
                                 },
                                 success: function ( res )
                                 {
-                                    dialogWindow('Thank you. The message has been sent.', "information");
+                                    dialogWindow('Thank you. Your message has been sent successfully..', "information");
                                     // $('.form-control').val('');
                                     
                                     form.reset();

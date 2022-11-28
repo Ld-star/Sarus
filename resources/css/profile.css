@@ -117,7 +117,7 @@ a {
 
 #password-value {
     float: left;
-    width: 55px;
+    width: 30px;
 }
 
 #APIButton {
@@ -429,6 +429,8 @@ h4 {
     background-color: #eff4fb;
     border: 1px solid #eee;
     margin-top: 100px;
+	padding-right: 30px;
+    padding-left: 30px;
 }
 
 .main-content>h1 {
@@ -447,7 +449,7 @@ h4 {
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, .075);
     border-radius: 6px;
     text-align: left;
-    padding: 20px 40px 50px;
+    padding: 20px 20px 50px;
     height: 100%;
     width: 100%;
     max-width: 100%;
@@ -679,6 +681,8 @@ h4 {
 
 #btnSaveUserPassword {
     margin-top: 12px;
+	height: 36px
+	font-size: 14px
 }
 
 .form-control {
@@ -886,11 +890,11 @@ h4 {
 }
 
 tr td:nth-of-type(2) {
-    width: 60px;
+    width: 30px;
 }
 
 tr td:nth-of-type(3) {
-    padding: 2px 8px 0;
+    padding: 2px 0px 0px;
 }
 
 [id^=dropDownButtonArrowjqxdropdownbutton] {
@@ -1006,6 +1010,8 @@ tr td:nth-of-type(3) {
 
 .btn {
     padding: 0px 12px;
+	height:36px;
+    font-size: 14px;
 }
 
 #disclaimer {

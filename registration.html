@@ -19,7 +19,7 @@
 
     <link href="resources/idm-service/resources/css/font-awesome.min.css" rel="stylesheet">
     <link href="resources/idm-service/resources/css/bootstrap-navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="resources/idm-service/resources/css/main.css">
+
     <link rel="stylesheet" href="resources/css/main.css">
     <link href="resources/idm-service/resources/css/responsive.css" rel="stylesheet">
     <link href="resources/css/general.css" rel="stylesheet">
@@ -39,8 +39,9 @@
     <link rel="stylesheet" href="resources/css/samples.css">
 
     <!-- JS Files -->
-    <script src="resources/js/jquery-1.12.3.js"></script>
-    <script src="resources/js/jquery-3.6.0.min.js"></script>
+    <!-- <script src="resources/js/jquery-1.12.3.js"></script>
+    <script src="resources/js/jquery-3.6.0.min.js"></script> -->
+    <script src="resources/idm-service/resources/js/jquery-1.12.3.js"></script>
     <script src="resources/js/bootstrap.min.js"></script>
     <script src="resources/js/bootstrap-dropdown.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -49,7 +50,7 @@
 	<script src="resources/idm-service/resources/js/bootstrap-dropdown.js"></script>
     
     <script src="resources/js/include-html.js"></script>
-    <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+    
     <script src="resources/js/jquery-ui.js"></script>
     <script src="dev/api/config/config.js"></script>
     <script src="dev/api/authentication.js"></script>
@@ -61,14 +62,17 @@
     <script src="/resources/js/bootstrap-formhelpers-selectbox.js"></script>
     <script src="/resources/js/bootstrap-formhelpers-countries.en_US.js"></script>
     <script src="resources/js/top-menu.js"></script>
-    <script src="resources/js/home.js"></script>
+	<!-- <script src="resources/js/home.js"></script> -->
+	
+	<script src="resources/js/goto_homepage.js"></script>
+	<script defer src="resources/js/contact.js"></script>
     <script src="resources/js/messages.js"></script>
     <script src="resources/js/common.js"></script>
-    <script src="resources/js/goto_homepage.js"></script>
     <script src="resources/js/owl.carousel.min.js"></script>
     <script src="resources/js/float.js"></script>
-
     <link rel="icon" type="image/x-icon" href="resources/api_favicon.png">
+    <link rel="stylesheet" href="resources/css/monitor-gui.css" type="text/css" />
+<link rel="stylesheet" href="resources/css/monitor-ui.css" type="text/css" />
     <style>
         .popover.bottom > .arrow {
 			left: 12% !important;
@@ -86,7 +90,8 @@
                 <h1>Premier Market Data</h1>
                 <p class="banner-desc">Quality market data is the life blood of any trading company.
                 <br>
-                Power your business systems with our curated reference data.<br> 
+                Power your business systems with our curated reference data.
+				<br> <br>
                     Create and publish web reports, charts, analytics or build your own data
                     solutions easily with our powerful <strong>Monitor+</strong> JSON web API.</p>
             </div>
@@ -377,7 +382,7 @@
                             <h2>Register for your free company account</h2>
                         </div>
 
-                        <form id="registrationForm" data-toggle="validator" >
+                        <form id="registrationForm" >
                             <div class="enquriy-box-form">
                                 <div class="form-group" style="margin-right: 7px;">
                                     <label class="main-label">First Name <sup class="mandatory">*</sup></label>
@@ -395,12 +400,12 @@
 
                                 <div class="form-group">
                                     <label class="main-label">Job Title</label>
-                                    <input name="job" id="job" type="text" class="form-control">
+                                    <input name="job" id="job" type="text" class="form-control" >
                                 </div>
 
                                 <div class="form-group">
                                     <label class="main-label">Company <sup class="mandatory">*</sup></label>
-                                    <input name="company" id="company" type="text" class="form-control">
+                                    <input name="company" id="company" required type="text" class="form-control">
                                 </div>
 
                                 <div class="form-group">
@@ -411,7 +416,7 @@
                                     </div>
                                     <div class="form-group">
                                         <input name="streatName" id="streatName" type="text" class="form-control"
-                                            placeholder="Street name">
+                                            placeholder="Street name" required>
                                     </div>
                                     <div class="form-group" style="margin-right: 7px;">
                                         <input name="city" id="city" data-minlength="3" required type="text"
@@ -428,7 +433,7 @@
                                     <label class="main-label">Country <sup class="mandatory">*</sup></label>
                                     <div id="country" class="bfh-selectbox bfh-countries" data-country="GB"
                                         data-flags="true" data-blank="false" onchange="countryOnChange()">
-                                        <input type="hidden" value="">
+                                        <input type="hidden" value="" >
                                         <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox"
                                             href="#">
                                             <span class="bfh-selectbox-option input-medium" data-option=""></span>
@@ -458,14 +463,15 @@
                                 <div class="form-group">
                                     <label class="main-label">Tell us about how you'd like to use the market data
                                         <sup class="mandatory">*</sup></label>
-                                    <textarea id="message" name="" cols="5" rows="5" class="form-control"></textarea>
+                                    <textarea id="message" name="" cols="5" rows="5" minlength="16" class="form-control" required></textarea>
                                 </div>
 
-                                <div class="form-group" style="margin-bottom: 0%;">
-                                    <input id="checknotrebot" type="checkbox" required>
-                                    <label style="font-weight: inherit;" for="checknotrebot">I'm
-                                        <strong>not</strong> a
-                                        robot</label>
+                                <div class="term">
+                                    <input type="checkbox" id="check" required>
+                                    <label for="check" style="font-weight: 100;">Agree with our <a
+                                            href="https://www.sarus.com/terms-and-conditions">Terms &
+                                            Conditions</a></label>
+    
                                 </div>
                                 <div class="Recaptcha">
                                     <img class="btn" id="refreshbtn" src="https://www.gstatic.com/recaptcha/api2/logo_48.png">
@@ -474,7 +480,7 @@
                                 </div>
 
                                 <div  style="display: flex; justify-content: end;">
-                                    <button id="submit" type="submit" class="btn send-btn " >Send</button>
+                                    <button id="submit" type="submit" class="btn send-btn">Send</button>
                                 </div>
 
                             </div>

@@ -64,7 +64,7 @@ const leftSide=document.querySelector(".left-side");
 const hamburger=document.querySelector(".hamburger");
 const left_toc=document.querySelectorAll(".left-side ul li a");
 const headings=document.querySelectorAll(".head-padding");
-console.log(headings)
+// console.log(headings)
 hamburger.addEventListener("click",()=>{
   leftSide.classList.toggle("showToc");
 })

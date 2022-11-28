@@ -27,7 +27,7 @@ $(document).ready(function(){
         if(recaptch_index == 0)
         {
             $('[data-toggle="popover"]').popover('show'); 
-            document.getElementsByClassName('popover-content')[0].innerHTML +=  `<img src="resources/error.png" style="width: 20px; margin: -4px 5px 0 1px">Input correct answer.`;
+            document.getElementsByClassName('popover-content')[0].innerHTML +=  `<img src="resources/error.png" style="width: 20px; margin: -4px 5px 0 1px">Input corrent answer.`;
             return;
         }
         else{
@@ -41,8 +41,7 @@ $(function(){
   
   (function($){
         
-      jQuery.fn.ebcaptcha = function(options){
-
+      jQuery.fn.ebcaptcha = function(options) {
           var element = this; 
           var input = this.find('#ebcaptchainput'); 
           var label = this.find('#ebcaptchatext'); 
@@ -135,7 +134,7 @@ form.addEventListener("submit",(e)=>{
                             body_type: 'text'
                         },
                         success: function(data) {
-                            dialogWindow('Thank you. The message has been sent.', "information");
+                            dialogWindow('Thank you. Your message has been sent successfully.', "information");
                             form.reset();
                         },
                         error:function(jqx,text,error)
@@ -143,12 +142,12 @@ form.addEventListener("submit",(e)=>{
                             let e;
                             if(jqx.responseJSON != undefined) e = jqx.responseJSON.error;
                             else e = error;
-                            dialogWindow("Error in sending request: "+e, "error");
+                            dialogWindow("The Send request failed with the error: "+e, "error");
                             // alert("error in sending request")
                         },
                     success: function ( res )
                     {
-                        dialogWindow('Thank you. The message has been sent.', "information");
+                        dialogWindow('Thank you. Your message has been sent successfully.', "information");
                         // $('.form-control').val('');
                         // alert("Thank you for your message. We'll be in touch shortly.");
                         form.reset();

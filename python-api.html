@@ -31,14 +31,20 @@
     <link rel="stylesheet" href="resources/css/footer.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="resources/idm-service/resources/css/main.css" rel="stylesheet">
 
+<!-- 
     <link href="resources/jqwidgets/styles/jqx.base.css" rel="stylesheet">
 	<link href="resources/jqwidgets/styles/jqx.light.css" rel="stylesheet">
-	<link href="resources/idm-service/resources/css/main.css" rel="stylesheet">
+	
+
 
 	<link rel="stylesheet" href="resources/css/slick.grid.css" type="text/css" />
 	<link rel="stylesheet" href="resources/css/slick.pager.css" type="text/css" />
 	<link rel="stylesheet" href="resources/css/slick.columnpicker.css" type="text/css" />
+	
+-->
+	
     <link rel="stylesheet" href="resources/css/monitor-gui.css" type="text/css" />
     <link rel="stylesheet" href="resources/css/monitor-ui.css" type="text/css" />
 
@@ -52,29 +58,10 @@
     <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
     <script src="resources/js/jquery-ui.js"></script>
 
-    <script src="resources/jqwidgets/jqxcore.js"></script>
-	<script src="resources/jqwidgets/jqxwindow.js" async></script>
-	<script src="resources/jqwidgets/jqxbuttons.js" async></script>
-	<script src="resources/jqwidgets/jqxinput.js" async></script>
-    <script src="resources/jqwidgets/jqxlistbox.js" async></script>
-    <script src="resources/jqwidgets/jqxdropdownlist.js" async></script>
-	<script src="resources/jqwidgets/jqxmenu.js" async></script>
-	<script src="resources/jqwidgets/jqxcheckbox.js" async></script>
-
-	<script src="resources/js/jquery.event.drag-2.3.0.js"></script>
-	<script src="resources/js/slick.core.js"></script>
-	<script src="resources/js/slick.formatters.js" async></script>
-	<script src="resources/js/slick.editors.js"> async</script>
-	<script src="resources/js/slick.rowselectionmodel.js" async></script>
-	<script src="resources/js/slick.grid.js" async></script>
-	<script src="resources/js/slick.dataview.js" async></script>
-	<script src="resources/js/slick.cellrangeselector.js" async></script>
-	<script src="resources/js/slick.cellselectionmodel.js" async></script>
-	<script src="resources/js/slick.rowmovemanager.js" async></script>
-  	<script src="resources/js/slick.checkboxselectcolumn.js" async></script>
-
+ 
     <script src="dev/api/config/config.js"></script>
-    <script src="dev/api/authentication.js"></script>
+   <script src="dev/api/authentication.js"></script> 
+    <script src="dev/api/params.js"></script>
     <script src="resources/js/jquery.ihavecookies.min.js"></script>
     <script src="resources/js/top-menu.js"></script>
     <script src="resources/js/messages.js"></script>
@@ -91,9 +78,8 @@
         }
 
         section.main-content {
-            margin-top: 98px;
-            padding: 32px;
-            padding-top: 0%;
+            margin: 0px !important; 
+            padding: 150px 32px 0 32px !important;
         }
 
         section.main-content .info-monitor .blue-title {
@@ -323,11 +309,7 @@
             border: 4px solid #ffffff !important;
             max-width: 86vw;
         }
-
-        .clearfix {
-            padding-left: 0% !important;
-            padding-right: 0% !important;
-        }
+ 
 
         #main-top {
             position: sticky;
@@ -336,13 +318,13 @@
         /* responsive area */
         @media screen and (max-width:880px) {
             section.main-content {
-                margin-top: 65px;
+                padding-top: 65px;
             }
         }
 
         @media screen and (max-width:767px) {
             section.main-content {
-                margin-top: 50px;
+                padding-top: 50px;
 
             }
         }
@@ -354,12 +336,9 @@
     <div class="fixpage">
 
 
-        <nav class="navbar navbar-default navbar-fixed-top" include-html="menu.html" id="menu_file"></nav>
+        <nav class="navbar navbar-default navbar-fixed-top" include-html="menu.html" id="menu_file"></nav> 
 
-
-
-
-        <section class="main-content dis-block clearfix">
+        <section class="main-content dis-block">
             <div class="top-logo" style="margin:0px;padding: 20px 10px; background-color: RGB(249,253,234);">
                 <img src="resources/images/python-monitor.png" alt="r-rmonitor-plus" width="500">
             </div>
@@ -930,6 +909,10 @@
 
         </div>
 
+        <div id="dialogWindow">
+            <span id="dialogWindowContent"></span>
+        </div>
+        
         <div include-html="footer.html" id="footer_file"></div>
 
     </div>

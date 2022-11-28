@@ -174,10 +174,8 @@ $(document).ready(function() {
                         '<p class="equal-height">' + data[i].Description + '</p>' +
                         '<div class="dis-block clearfix"><div class="idm-date"><i>' +
                         '<img src="resources/idm-service/resources/images/date-icon.jpg" ' + updateHint + ' alt=""></i>' + available +
-                        '<div class="idm-series">Series: <span>' + data[i][obj].SeriesCount + '</span></div>' + accessData +
-                        '</div><div class="idm-inner-footer"><span class="premium-bt pull-left">' +
-                        '</span> <span class="online-bt pull-right"><a href="mydsviewer?Datasource=' + data[i].Datasource + '" target="_blank">View Details</a></span>' +
-                        '</div></div></div></div>');
+                        '<div class="idm-series">Series: <span>' + data[i][obj].SeriesCount + '</span></div>' + accessData + 
+                        ' <span class="online-bt pull-right"><a href="mydsviewer?Datasource=' + data[i].Datasource + '" target="_blank">View Details</a></span></div></div></div></div>');
 
                     items.appendTo('.idm-database-block > .row');
 

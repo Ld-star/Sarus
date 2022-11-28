@@ -94,6 +94,7 @@ $global_log_file_name = "sql_errors.log";
 $global_log_off = false;
 function ToLog( $Message,$isLogStack=false)
 {	
+	return;
 	global $global_log_off,$global_log_file_name;
 	if($global_log_off === true) return;
 	$log = new Logger($global_log_file_name);

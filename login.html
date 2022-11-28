@@ -19,18 +19,13 @@
     <link href="resources/idm-service/resources/css/main.css" rel="stylesheet">
     <link href="resources/idm-service/resources/css/responsive.css" rel="stylesheet">
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/jqwidgets/styles/jqx.base.css" type="text/css" />
     <link href="resources/css/login.css" rel="stylesheet">
     <link rel="stylesheet" href="resources/css/menu.css">
     <link rel="stylesheet" href="resources/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer"
     />
-
-    <link href="resources/jqwidgets/styles/jqx.base.css" rel="stylesheet">
-    <link href="resources/jqwidgets/styles/jqx.light.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="resources/css/slick.grid.css" type="text/css" />
-    <link rel="stylesheet" href="resources/css/slick.pager.css" type="text/css" />
-    <link rel="stylesheet" href="resources/css/slick.columnpicker.css" type="text/css" />
+ 
     <link rel="stylesheet" href="resources/css/monitor-gui.css" type="text/css" />
     <link rel="stylesheet" href="resources/css/monitor-ui.css" type="text/css" />
 
@@ -41,51 +36,35 @@
     <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
     <script src="resources/idm-service/resources/js/bootstrap.min.js"></script>
     <script src="resources/idm-service/resources/js/bootstrap-dropdown.js"></script>
+
     <script src="resources/js/jquery-ui.js"></script>
-
     <script src="resources/jqwidgets/jqxcore.js"></script>
-    <script src="resources/jqwidgets/jqxwindow.js" async></script>
-    <script src="resources/jqwidgets/jqxsplitter.js" async></script>
-    <script src="resources/jqwidgets/jqxscrollbar.js" async></script>
-    <script src="resources/jqwidgets/jqxbuttons.js" async></script>
-    <script src="resources/jqwidgets/jqxinput.js" async></script>
-    <script src="resources/jqwidgets/jqxlistbox.js" async></script>
-    <script src="resources/jqwidgets/jqxdropdownlist.js" async></script>
-    <script src="resources/jqwidgets/jqxmenu.js" async></script>
-    <script src="resources/jqwidgets/jqxcheckbox.js" async></script>
-
-    <script src="resources/js/jquery.event.drag-2.3.0.js"></script>
-    <script src="resources/js/slick.core.js"></script>
-    <script src="resources/js/slick.formatters.js" async></script>
-    <script src="resources/js/slick.editors.js" async></script>
-    <script src="resources/js/slick.rowselectionmodel.js" async></script>
-    <script src="resources/js/slick.grid.js" async></script>
-    <script src="resources/js/slick.dataview.js" async></script>
-    <script src="resources/js/slick.cellrangeselector.js" async></script>
-    <script src="resources/js/slick.cellselectionmodel.js" async></script>
-    <script src="resources/js/slick.rowmovemanager.js" async></script>
-    <script src="resources/js/slick.checkboxselectcolumn.js" async></script>
+    
 
     <script src="dev/api/config/config.js"></script>
     <script src="dev/api/authentication.js"></script>
-    <script src="dev/api/user_favorites.js"></script>
     <script src="resources/js/top-menu.js"></script>
     <script src="resources/js/messages.js" defer></script>
     <script src="resources/js/login.js" defer></script>
-
+     
     <style>
         .login-form input:not(#checkbox):focus {
             border: 2px solid blue !important;
-        }
+        } 
+        /* #jqxNotificationDefaultContainer-top-right{
+            display: none !important;
+        } */
+       
     </style>
 </head>
 
-<body>
+<body> 
+
     <div class="fixpage login-page">
 
         <nav class="navbar navbar-default navbar-fixed-top" include-html="menu.html" id="menu_file"></nav>
 
-        <section class="full-height">
+        <section class="full-height banner-section">
             <div class="container">
                 <div class="row" style="display: table-row;">
                     <div class="no-float login-img col-xs-0 col-sm-4 col-lg-6">

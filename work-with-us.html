@@ -6,42 +6,70 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work With Us</title>
-    <link rel="stylesheet" href="resources/css/work-with-us.css">
-	<link rel="icon" type="image/x-icon" href="resources/favicon.png">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,600i,700,700i,800,800i"
-		rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,500i,600,600i,700,700i,800"
-		rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
-	<link href="resources/idm-service/resources/css/font-awesome.min.css" rel="stylesheet">
-	<link href="resources/idm-service/resources/css/bootstrap-navbar.css" rel="stylesheet">
-	<link href="resources/idm-service/resources/css/responsive.css" rel="stylesheet">
-	<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
-	<link href="resources/css/general.css" rel="stylesheet">
-	<link rel="stylesheet" href="resources/css/menu.css">
-	<link rel="stylesheet" href="resources/css/footer.css">
-
-	<link href="resources/jqwidgets/styles/jqx.base.css" rel="stylesheet">
-	<link href="resources/jqwidgets/styles/jqx.light.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <link href="resources/idm-service/resources/css/font-awesome.min.css" rel="stylesheet">
+    <link href="resources/idm-service/resources/css/bootstrap-navbar.css" rel="stylesheet">
+    <link href="resources/idm-service/resources/css/responsive.css" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/menu.css">
+    <link rel="stylesheet" href="resources/css/footer.css">
+    <link rel="stylesheet" href="resources/css/work-with-us.css">  
 	<link href="resources/idm-service/resources/css/main.css" rel="stylesheet">
-<!--
-	<link rel="stylesheet" href="resources/css/slick.grid.css" type="text/css" />
-	<link rel="stylesheet" href="resources/css/slick.pager.css" type="text/css" />
-	<link rel="stylesheet" href="resources/css/slick.columnpicker.css" type="text/css" />
--->
-	<link rel="stylesheet" href="dist/themes/default/style.min.css" />
 
-	
+    <link rel="stylesheet" href="resources/css/monitor-gui.css" type="text/css" />
+    <link rel="stylesheet" href="resources/css/monitor-ui.css" type="text/css" />
+ 
+   
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <script src="resources/idm-service/resources/js/jquery-1.12.3.js"></script>
+    <script src="resources/idm-service/resources/js/bootstrap.min.js"></script>
+	<script src="resources/idm-service/resources/js/bootstrap-dropdown.js"></script>
+
+    <script src="resources/js/jquery-ui.js"></script>
+    <script src="resources/jqwidgets/jqxcore.js"></script>
+
+    <script src="dev/api/config/config.js"></script>
+    <script src="dev/api/authentication.js"></script>
+
+    <script src="dev/api/utils/utils.js"></script>
+    <script src="resources/js/jquery.ihavecookies.min.js"></script>
+    <script src="resources/js/top-menu.js"></script>  
+    <script src="resources/js/goto_homepage.js"></script>
+    <script defer src="resources/js/work_with_us.js"></script>
     <style>
         .popover.bottom > .arrow {
 			left: 12% !important;
 		}
+        .dropdown-menu li:hover {
+            cursor: pointer;
+            background:rgb(16, 188, 231) ;
+        }
+        #interestedOption {
+            width: 0;
+            height: 0;
+            position: absolute;
+            padding: 0;
+            top: 32px;
+            left: 111px;
+            background: #fff;
+            border-color: #fff;
+        } 
+        .dropdown-menu.open ul{
+            display: block !important;
+        }
     </style>
 </head>
 
 <body>
     <div class="fixpage">
         <nav class="navbar navbar-default navbar-fixed-top" include-html="menu.html" id="menu_file"></nav>
+        <div style="height: 99px;">
+
+        </div>
         <section class="work-with-us-area">
             <div class="container">
                 <h2 class="work-with-us-title">work with us</h2>
@@ -51,12 +79,11 @@
         <!-- work-desc-area -->
         <section class="work-desc-area">
             <div class="container">
-                <p><b>We take a mature, no fuss approach to relationships with third parties.</b> We believe that
-                    collaboration
-                    is one of the best ways to create new business and opportunity. Other than providing an exceptional
+                <p>We take a mature, no fuss approach to relationships with third parties. We believe that collaboration
+                    is one of the best ways to create new business and opportunity. Other than providing an exceptional and 
                     cost effective service, our goal is to be easy to deal with, professional and to build lasting
                     relationships with our customers and colleagues.
-                    We understand that <i>your</i> success is key to our success.</p>
+                    We understand that <i>your</i> success is key to <i>our</i> success.</p>
             </div>
         </section>
 
@@ -89,10 +116,10 @@
                             <img src="resources/images/handshake.png" alt="">
                         </div>
                         <h3 class="card-title">Partnerships</h3>
-                        <p>As the old saying goes, "two heads are better than one”. B2B
+                        <p>As the saying goes, "two heads are better than one”. B2B
                             partnerships enable companies to harness the strengths and
                             abilities of one another to drive collaborative innovation and create
-                            commercial opportunity.<br><br> Partnerships allow companies to grow in areas that their
+                            opportunity.<br><br> Partnerships allow companies to grow in areas that their
                             customers need, both now and in the future. We are
                             interested in talking to innovative parties about mutually beneficial
                             partnerships.<br>
@@ -205,9 +232,10 @@
                                 <i class="las la-envelope form-icon"></i>
                                 <input type="email" placeholder="Your Email" id="email" required>
                             </div>
-                            <div>
+                            <!-- <div  class="dropdown">
+                                <i class='las la-clipboard-list form-icon'></i>
                                 <select name="" id="interestedOption" required>
-                                    <option value="Interested Option" disabled selected> Interested Option</option>
+                                    <option value="" disabled selected class="btn dropdown btn-default dropdown-toggle" type="button" data-toggle="dropdown">Interested Option</option>
                                     <option value="Sales Agent">Sales Agent</option>
                                     <option value="Developers">Developers</option>
                                     <option value="Partnerships">Partnerships</option>
@@ -215,14 +243,25 @@
                                     <option value="White Label Products">White Label Products</option>
                                     <option value="others">Other Solution</option>
                                 </select>
-                                <p class="error-text select-error">
-                                    <img src="resources/error.png" style="width: 20px; margin: -4px 5px 0 1px">One option must be Selected.
-                                </p>
+                                <div class="error-text select-error">Please select one option</div>
+                            </div> -->
+                            <div class="dropdown">
+                                <i class='las la-clipboard-list form-icon'></i>
+                                <button class="btn btn-default dropdown-toggle" type="button" id="drop_btn" data-toggle="dropdown">Contact Type
+                                </button><input type="text" required id="interestedOption" value="" style="width: 0;">
+                                <ul class="dropdown-menu" style="min-width: 100%;margin-top: 25px;" requried>
+                                  <li><a onclick='getlistname("Sales Agent")'>Sales Agent</a></li>
+                                  <li><a onclick='getlistname("Developers")'>Developers</a></li>
+                                  <li><a onclick='getlistname("Partnerships")'>Partnerships</a></li>
+                                  <li><a onclick='getlistname("Proprietary Data")'>Proprietary Data</a></li>
+                                  <li><a onclick='getlistname("White Label Products")'>White Label Products</a></li>
+                                  <li><a onclick='getlistname("others")'>Other Solution</a></li>
+                                </ul>
                             </div>
                             <div class="message">
                                 <i class="las la-sms form-icon"></i>
                                 <textarea id="message" cols="30" rows="10" placeholder="Your Message"
-                                    required></textarea>
+                                minlength="16" required></textarea>
                                 <p class="error-text textarea-error"><i
                                         class="fas fa-exclamation-circle error-icon"></i>The comment must be longer than
                                     4 characters.</p>
@@ -266,62 +305,71 @@
             <p class="sub-logo"> Copyright © 2018-2022 Sarus Systems Limited - Market Data Solutions </p>
         </div>
     </div>
-   
-    <!-- JS Files -->
-    <script src="resources/js/messages.js"></script>
-    <!-- <script src="resources/js/jquery-3.6.0.min.js"></script> -->
-    <script src="resources/idm-service/resources/js/jquery-1.12.3.js"></script>
-
-    <script src="resources/idm-service/resources/js/bootstrap.min.js"></script>
-    <script src="resources/idm-service/resources/js/bootstrap-dropdown.js"></script>
-    <script src="resources/js/jquery-ui.js"></script>
-
-    <link rel="stylesheet" href="resources/css/work-with-us.css">
-    <link rel="stylesheet" href="resources/css/monitor-gui.css" type="text/css" />
-    <link rel="stylesheet" href="resources/css/monitor-ui.css" type="text/css" />
-
-    <!-- <script src="resources/js/jquery-1.12.3.js"></script> -->
-    <script src="resources/js/jquery-3.6.0.min.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script> -->
-    <script src="resources/js/bootstrap.min.js"></script>
-
-    <!-- <script src="resources/js/jquery.ihavecookies.min.js"></script>
-    <script src="resources/js/top-menu.js"></script> -->
-    <!-- <script src="resources/js/home.js"></script> -->
-    <!-- <script src="resources/js/messages.js"></script>
-    <script src="resources/js/common.js"></script>
-    <script src="resources/js/jquery-ui.js"></script>
-
-    <script src="resources/jqwidgets/jqxcore.js"></script>
-    <script src="resources/jqwidgets/jqxwindow.js" async></script>
-    <script src="resources/jqwidgets/jqxbuttons.js" async></script>
-    <script src="resources/jqwidgets/jqxscrollbar.js" async></script>
-    <script src="resources/jqwidgets/jqxinput.js" async></script>
-    <script src="resources/jqwidgets/jqxlistbox.js" async></script>
-    <script src="resources/jqwidgets/jqxdropdownlist.js" async></script>
-    <script src="resources/jqwidgets/jqxmenu.js" async></script>
-    <script src="resources/jqwidgets/jqxcheckbox.js" async></script> -->
-
-    <!-- <script src="resources/js/jquery.event.drag-2.3.0.js"></script>
-    <script src="resources/js/slick.core.js"></script>
-    <script src="resources/js/slick.formatters.js" async></script>
-    <script src="resources/js/slick.editors.js"> async</script>
-    <script src="resources/js/slick.rowselectionmodel.js" async></script>
-    <script src="resources/js/slick.grid.js" async></script>
-    <script src="resources/js/slick.dataview.js" async></script>
-    <script src="resources/js/slick.cellrangeselector.js" async></script>
-    <script src="resources/js/slick.cellselectionmodel.js" async></script>
-    <script src="resources/js/slick.rowmovemanager.js" async></script>
-    <script src="resources/js/slick.checkboxselectcolumn.js" async></script> -->
-
-    <script src="dev/api/utils/utils.js"></script>
-    <script src="resources/js/goto_homepage.js"></script>
-    <script src="dev/api/config/config.js"></script>
-    <script src="dev/api/authentication.js"></script>
-    <script defer src="resources/js/work_with_us.js"></script>
-     <!-- work with us area -->
+    <!-- work with us area -->
     <script src="resources/js/vendor.js"></script>
     <script src="resources/js/include-html.js"></script>
+
+    <script>
+        //    let form=document.querySelector("form");
+        //    let text=document.getElementById("message");
+        //    let textarea_error=document.querySelector(".textarea-error");
+        //    let name=document.querySelector("#name");
+        //    let name_error=document.querySelector(".name-error");
+        //    let CompanyName_error=document.querySelector(".CompanyName-error");
+        //    let CompanyName=document.querySelector("#CompanyName");
+        //    let succes_form=document.querySelector("#form-success");
+        //   let form_checkbox=document.querySelector("#check");
+        //   let check_error=document.querySelector(".check-error");
+
+        //    CompanyName_error.style.display="none";
+        //    name_error.style.display="none";
+        //    textarea_error.style.display="none";
+        //    check_error.style.display="none";
+
+        //    form.addEventListener("submit",(e)=>{
+        //        e.preventDefault();
+
+        //        if(name.value.length<3 || CompanyName.value.length<3 || text.value.length<10 || !form_checkbox.checked){
+
+        //             if(name.value.length<3){
+        //                 name_error.style.display="Block";
+        //             }
+        //             else{
+        //                     name_error.style.display="none";
+        //             }
+
+
+        //             if(CompanyName.value.length<3){
+        //                     CompanyName_error.style.display="block";
+        //             }
+        //             else{
+        //                     CompanyName_error.style.display="none";
+        //             }
+
+        //             if(text.value.length<10){
+        //                     textarea_error.style.display="Block";
+        //             }
+        //             else{
+        //                     textarea_error.style.display="none";
+        //             }
+
+        //             if(!form_checkbox.checked){
+        //                 check_error.style.display="block";
+        //             }
+        //             else{
+        //                 check_error.style.display="none";
+        //             }
+
+        //         }
+
+        //         else{
+        //            alert("Thank you for your message. We'll be in touch shortly.");
+
+        //            form.reset();
+        //         }
+
+        //    })
+    </script>
 </body>
 
 </html>

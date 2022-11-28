@@ -195,17 +195,17 @@ span.ui-dialog-title {
   margin-right: 1px !important;
 }
 
-#reportBackups .jqx-window-header div,
+/* #reportBackups .jqx-window-header div,
 #exportDialogWindow .jqx-window-header div,
 #saveReportWindow .jqx-window-header div,
 #dateRangePopup .jqx-window-header div,
-#frequencyPopup .jqx-window-header div,
+/* #frequencyPopup .jqx-window-header div,
 #fillPopup .jqx-window-header div,
 #windowBackups .jqx-window-header div,
 #seriesPropertiesPopup .jqx-window-header div,
 #selectSeriesPopup .jqx-window-header div {
   margin-right: 1px !important;
-}
+} */
 
 #reportBackups.jqx-window-header.jqx-window-close-button-background,
 #reportCreator.jqx-window-header .jqx-window-close-button-background,

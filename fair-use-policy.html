@@ -86,19 +86,11 @@
 			margin: auto;
 		}
 
-
 		@media screen and (max-width:880px) {
-			.clear-top {
-				margin-top: 65px !important;
-			}
-
-		}
-
-		@media screen and (max-width:767px) {
-			.clear-top {
+			.banner-section {
+				padding-top: 27px !important;
 				margin-top: 50px !important;
 			}
-
 		}
 
 		.privacy-policy-page .api-right-txt p {
@@ -112,7 +104,7 @@
 	<div class="fixpage">
 		<nav include-html="menu.html" id="menu_file" class="navbar navbar-default navbar-fixed-top "></nav>
 
-		<section class="main-content dis-block clearfix footer-space clear-top">
+		<section class="main-content dis-block banner-section footer-space ">
 			<div class="wrap">
 				<div
 					class="dis-block clearfix api-page static-page cookies-page documentor-default privacy-policy-page policy-details-page">
@@ -204,7 +196,9 @@
 		</section>
 
 		<div include-html="footer.html" id="footer_file"></div>
-
+		<div id="dialogWindow">
+			<span id="dialogWindowContent"></span>
+		  </div>
 		<div class="text-center footertxt">
 			<p class="sub-logo"> Copyright © 2018-2022 Sarus Systems Limited - Market Data Solutions </p>
 		</div>

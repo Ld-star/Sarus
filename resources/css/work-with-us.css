@@ -75,8 +75,7 @@ header img {
     background: linear-gradient(rgba(0, 0, 33, .19), rgba(0, 0, 33, .19)), url("../images/work-wu-1200.jpg");
     background-position: center;
     background-size: cover;
-    margin-top: 99px;
-
+    margin-top: 0px;
 }
 
 .work-with-us-area .work-with-us-title {
@@ -92,7 +91,7 @@ header img {
 
 /* work-desc-area */
 .work-desc-area {
-    padding: 25px 0px;
+      padding-top: 25px;
 }
 
 .work-desc-area p {
@@ -103,7 +102,7 @@ header img {
 /* work-facilities-area */
 .work-facilities-area .facilities-wrapper {
     width: 100%;
-    padding: 50px 0px;
+    padding: 0px 0px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -160,7 +159,7 @@ header img {
 }
 
 .work-facilities-area .card .card-title {
-    color: black;
+    color: #004B78;
     text-transform: uppercase;
     font-weight: 600;
     font-size: 22px;
@@ -233,7 +232,7 @@ header img {
 
 .start-working-area .message-area input[type="checkbox"] {
     width: inherit;
-    margin: -4px 10px 0 0;
+    margin: -4px 13px 0 0;
 }
 
 .start-working-area .message-area .term {
@@ -544,4 +543,29 @@ select,
 button,
 .message-and-img-wrapper {
     border-radius: 8px;
+}
+.dropdown-toggle {
+    border-radius: 8px;
+    width: 100% !important;
+    padding-left: 40px !important;
+}
+.dropdown-toggle.btn-default {
+    color: #333333;
+    background-color: #e6e6e6;
+    border-color: rgb();
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffff;
+    padding: 13px;
+;
+    border: none;
+}
+.dropdown-menu {
+    min-width: 450px;
+    margin-top: 25px ;
+}
+.dropdown {
+    margin: 10px 0 10px 0;
+    position: relative;
 }

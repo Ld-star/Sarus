@@ -9757,7 +9757,7 @@ jQuery.extend( {
 
 				// Simply rethrow otherwise
 				} else {
-					throw e;
+					// throw e;
 				}
 			}
 		}

@@ -1629,7 +1629,7 @@ $(document).ready(function() {
                         var bates = e.Bates;
                         var obj = {
                             children: [],
-                            icon: "resources/css/icons/tree-folder.png",
+                            icon: false,
                             label: e.Symbol + " " + e.Name + " (" + e.Datasource + ")",
                             text: e.Symbol + " " + e.Name + " (" + e.Datasource + ")",
                             value: { name: e.Symbol + " " + e.Name + " (" + e.Datasource + ")", series: [{ Datasource: e.Datasource, Symbol: e.Symbol, Datacategory: e.Datacategory, tid: resultJson.length }], items: [], root: false },
@@ -1641,7 +1641,8 @@ $(document).ready(function() {
                             var batesLabel = bates[reportJson.Series[i].BateIndex[k]];
 
                             obj.children.push({
-                                icon: "resources/css/icons/ts2.png",
+                                // icon: "resources/css/icons/ts2.png",
+                                icon: false,
                                 items: [],
                                 id: batesIndex,
                                 text: batesLabel,
@@ -2071,7 +2072,8 @@ $(document).ready(function() {
 
             var obj = {
                 children: [],
-                icon: "resources/css/icons/tree-folder.png",
+                // icon: "resources/css/icons/tree-folder.png",
+                icon: false,
                 label: seriesItem.Symbol + " " + seriesItem.Name + " (" + seriesItem.Datasource + ")",
                 text: seriesItem.Symbol + " " + seriesItem.Name + " (" + seriesItem.Datasource + ")",
                 value: { name: seriesItem.Symbol + " " + seriesItem.Name + " (" + seriesItem.Datasource + ")", series: [{ Datasource: seriesItem.Datasource, Symbol: seriesItem.Symbol, Datacategory: seriesItem.Datacategory, tid: resultJson.length }], items: [], root: false },
@@ -2089,7 +2091,8 @@ $(document).ready(function() {
                 }
 
                 obj.children.push({
-                    icon: "resources/css/icons/ts2.png",
+                    // icon: "resources/css/icons/ts2.png",
+                    icon: false,
                     items: [],
                     id: batesIndex,
                     text: batesLabel,

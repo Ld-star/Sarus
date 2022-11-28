@@ -117,31 +117,26 @@ $( document ).ready(function ()
     	    if( id.validity.valid != true ) 
     	    {
     		dialogWindow('Incorrect value of email. Use format xxxx@domain',"Error");
-    		$('#submitButton').prop('disabled', true);
+    		// $('#submitButton').prop('disabled', true);
     		$('#email').val('');
     	    }
         });
 
-        $('.form-control').keyup(function() {
-            var allfull = true;
-            $('.form-control:not(#telephone):not(#companyName)').each(function () {
-                if ( $( this ).val() == "" )
-                    allfull = false;
-            });
+        // $('.form-control').keyup(function() {
+        //     var allfull = true;
+        //     $('.form-control:not(#telephone):not(#companyName)').each(function () {
+        //         if ( $( this ).val() == "" )
+        //             allfull = false;
+        //     });
  
-            if ( allfull ) $('#submitButton').prop('disabled', false);
-            else $('#submitButton').prop('disabled', true);
-        });
+        //     if ( allfull ) $('#submitButton').prop('disabled', false);
+        //     else $('#submitButton').prop('disabled', true);
+        // });
 
         $('#submitButton').click(function () {
             var input_value = null;
             $('#ebcaptchainput').val( input_value );
-            console.log(input_value);
-            if(!recaptch_index ) {
-                $('[data-toggle="popover"]').popover('show'); 
-                document.getElementsByClassName('popover-content')[0].innerHTML +=  `<img src="resources/error.png" style="width: 20px; margin: -4px 5px 0 1px">The answer is not corrent`;
-                return;
-            }
+            
             let name = page.split('-'),
             date = new Date();
             name.length -= 1;
@@ -172,6 +167,16 @@ $( document ).ready(function ()
 		m_telephone: $('#telephone').val(),
 		m_comment: $('#comment').val()
             };
+            if(data['m_name'] && data['m_companyName'] && data['m_country'] && data['m_email'] && data['m_telephone'] && data['m_comment'] && data['m_comment'].length >= 15) {
+                if(!recaptch_index ) {
+                    $('[data-toggle="popover"]').popover('show'); 
+                    document.getElementsByClassName('popover-content')[0].innerHTML +=  `<img src="resources/error.png" style="width: 20px; margin: -4px 5px 0 1px">The answer is not correct`;    
+                    return;
+                }
+            } else {
+                return;
+            }
+         
             let subject = 'Web Server Message ['+page_id+'] from ' + data['m_email'];
 	    var message = "Name\r\n-------------------------\r\n"
                     + data['m_name']
@@ -200,11 +205,11 @@ $( document ).ready(function ()
             	    let e;
 		    if(jqx.responseJSON != undefined) e = jqx.responseJSON.error;
 		    else e = error;
-            	    dialogWindow("Error in sending request: "+e, "error");
+            	    dialogWindow("The Send request failed with the error: "+e, "error");
                 },
                 success: function ( res )
                 {
-                    dialogWindow('Thank you. The message has been sent.', "information");
+                    dialogWindow('Thank you. Your message has been sent successfully.', "information");
                     $('.form-control').val('');
                 },
                 async: false
@@ -219,7 +224,7 @@ $( document ).ready(function ()
         logout();
     });
 
-    $("#submitButton").prop('disabled', true);
+    
 
     function enableBtn()
     {

@@ -501,7 +501,7 @@ nav li a img {
 	border: 1px solid #dbdbdb;
 	padding: 8px 1px 8px 12px;
 	margin: 10px 10px 35px 0px;
-	width: 240px;
+	width: 230px;
 	background: white;
 	border-radius: 5px;
 	display: flex;
@@ -511,15 +511,26 @@ nav li a img {
 	margin-right: 20px;
 	margin-top: 8px;
 	margin-bottom: 1px;
-	padding: 16px;
 	height: 10px;
-	width: 60px;
+	width: 50px;
 	border: 1px solid #dbdbdb;
 	border-radius: 0;
 	font-size: 18px;
+    padding-top: 16px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: 16px;
+    text-align: center;	
+	
+	
 }
 .label_C{
-	width: 72px;
-	margin: 12px 2px 3px 10px;
+	width: 60px;
+	margin: 12px 2px 3px 4px;
 	font-size: 18px;
+}
+
+.banner-section {
+	margin-top: 0px !important;
+    padding-top: 101px !important;
 }

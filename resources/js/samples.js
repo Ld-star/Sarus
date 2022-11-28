@@ -3,8 +3,32 @@ var per_num = 10;
 
 var session = getSession();
 
-// If the jupyter-list.json file axist then show the select option
-// If the python-list.json file axist then show the select option
+const RunDialog = document.querySelector('#RunDialog');
+const closedialog=document.querySelector("#close_id_btn");
+const cancel_id_btn=document.querySelector("#cancel_id_btn");
+const Rundialog=document.querySelector("#run_id_btn");
+const background_grey = document.querySelector('#background_grey') 
+function showDialog() {
+    
+    RunDialog.classList.remove("notVisible");
+    background_grey.classList.remove('notVisible');
+
+    closedialog.addEventListener("click",()=>{
+        RunDialog.classList.add("notVisible");
+        background_grey.classList.add("notVisible");
+    })
+    cancel_id_btn.addEventListener("click",()=>{
+        RunDialog.classList.add("notVisible");
+        background_grey.classList.add("notVisible");
+        
+    })
+    Rundialog.addEventListener("click",()=>{
+        RunDialog.classList.add("notVisible");
+        background_grey.classList.add("notVisible");
+        let url = 'https://mybinder.org/v2/gh/Sarus-Support/Python-Samples/HEAD';
+        window.open(url, '_blank').focus();
+    })
+}
 $.ajax({
     url: 'analytic-demo/python-list.json',
     type: 'GET',
@@ -17,51 +41,34 @@ $.ajax({
     success: function () {
         let pythonOption = `<option  selected value="python">Python</option>`;
         $('#language-select').append(pythonOption);
+        $.ajax({
+            url: 'analytic-demo/r-list.json',
+            type: 'GET',
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            },
+            success: function () {
+                let rOption = `<option value="r">R</option>`;
+                $('#language-select').append(rOption);
+            }
+        });
     }
 });
 
 // If the r-list.json file axist then show the select option
-$.ajax({
-    url: 'analytic-demo/r-list.json',
-    type: 'GET',
-    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        // functionNotificationMessage({
-        //     text: 'There is an error at ' + this.url,
-        //     type: 'error'
-        // });
-    },
-    success: function () {
-        let rOption = `<option value="r">R</option>`;
-        $('#language-select').append(rOption);
-    }
-});
+
 
 
 setTimeout(() => {
+    //  show_grid($('#language-select').find("option:first-child").val(), per_num);
     show_grid($('#language-select').find("option:first-child").val(), per_num);
     accbtn();
 },
-200);
+300);
 
 
-async function show_grid(selection, per_num = 3, sel_page = 1) {
+async function show_grid(selection, per_num = 2, sel_page = 1) {
     var data;
-    if (selection == "jupyter") {
-        data = await $.ajax({
-            type: "GET",
-            url: "analytic-demo/jupyter-list.json",
-            dataType: "JSON",
-            success: function (data) {
-
-            },
-            error: function (xhr) {
-                functionNotificationMessage({
-                    text: "The report list file for the jupyter demos cannot be found.",
-                    type: 'error'
-                });
-            }
-        });
-    } else if (selection == "python") {
+    if (selection == "python") {
         data = await $.ajax({
             type: "GET",
             url: "analytic-demo/python-list.json",
@@ -74,7 +81,6 @@ async function show_grid(selection, per_num = 3, sel_page = 1) {
                     text: "The report list file for the python demos cannot be found.",
                     type: 'error'
                 });
-
             }
         });
     } else {
@@ -101,19 +107,37 @@ async function show_grid(selection, per_num = 3, sel_page = 1) {
 
     for (var i = start; i < end; i++) {
         var item = $('<div class="accordion-file">');
-        var lock_img = (data[i].free_enabled || (!data[i].free_enabled && (session !== null && session !== "" && session !== undefined))) ? "unlocked.png" : "locked.png";
-
-        var btn_active = ((data[i].free_enabled && data[i].filename != "") || (!data[i].free_enabled && (session !== null && session !== "" && session !== undefined) && data[i].filename != "")) ? "" : "disabled";
         
-        var btn_session;
-        if (session !== null && session !== "" && session !== undefined) {
-            btn_session = '';
-        } else {
-            btn_session = 'disabled';
+        // var lock_img = (data[i].free_enabled || (!data[i].free_enabled && (session !== null && session !== "" && session !== undefined))) ? "unlocked.png" : "locked.png";
+
+        // var btn_active = ((data[i].free_enabled && data[i].filename != "") || (!data[i].free_enabled && (session !== null && session !== "" && session !== undefined) && data[i].filename != "")) ? "" : "disabled";
+        
+        // var btn_session;
+        // if (session !== null && session !== "" && session !== undefined) {
+        //     btn_session = '';
+        // } else {
+        //     btn_session = 'disabled';
+        // }
+
+        var lock_img = data[i].FreeView_enabled  ?  "unlocked.png" :"locked.png" ;
+        var btn_active = data[i].FreeView_enabled ? '' : "disabled" ;
+        var btn_session = data[i].FreeDownload_enabled ? "" : "disabled";
+        var btn_run = data[i].FreeRun_enabled ? "" : "disabled";
+        var count_stars = data[i].Level;
+        var show_stars = '';
+        for(let i = 1; i < 4; i ++) {
+            var style_img = "style='margin-right: 0px'";
+            if (i == 3) {
+                style_img = "style='margin-right: 35px'";
+            }
+            if(i <= count_stars) {
+                show_stars += "<img "+ style_img +" src='resources/css/icons/star16.png'/>";
+            }
+            else {
+                show_stars += "<img "+ style_img +" src='resources/css/icons/star-grey16.png'/>";
+            }
         }
-
-
-        $('<button class="accordion-btn">' + data[i].report_name + ' <img src="resources/images/' + lock_img + '" alt=""></button>').appendTo(item);
+        $('<button class="accordion-btn">' + data[i].report_name +"<div>" + show_stars + '<img src="resources/images/' + lock_img + '" alt=""></div></button>').appendTo(item);
 
         var item_contents = $('<div class="accordion-content">');
 
@@ -136,37 +160,39 @@ async function show_grid(selection, per_num = 3, sel_page = 1) {
                 });
             } catch (e) {
                 btn_active = "disabled";
-                btn_session = 'disabled';
+                btn_session = 'disabled'; 
                 filename = data[i].filename.split("/");
                 filename = filename[filename.length - 1]
-                message = "The source file " + filename + " was not found"
+                message = "The source file '" + filename + "' was not found"
             }
         } else {
             if (data[i].filename == "") {
                 if (selection == "python") {
-                    message = "The  Python samples report list was not found!";
+                    message = "The  Python/Jupyter samples report list was not found!";
                 } else if (selection == "r") {
                     message = "The R samples report list was not found!";
                 } else {
-                    message = "The Jupyter samples report list was not found!";
+                    message = "The Python samples report list was not found!";
                 }
             }
         }
-
-        $('<div class="btn-wrapper"><button class="btn ' + btn_active + ' btn-primary me-4" onclick="javascript:code_view(\'' + selection + '\', \'' + data[i].filename + '\', \'' + btn_active + '\');">View</button><button class="btn ' + btn_session + '  btn-success" onclick="javascript:download(\'' + data[i].filename + '\', \'' + btn_session + '\');" >Download</button><span style="margin:6px 0 0 30px; color:#aaa">' + message + '</span></div>').appendTo(item_contents);
+        
+        filename = data[i].filename.split("/");
+        filename = filename[filename.length - 1];
+        $('<div class="btn-wrapper"><button class="btn ' + btn_active + ' btn-primary me-4" onclick="javascript:code_view(\'' + selection + '\', \'' + data[i].filename + '\', \'' + btn_active + '\');">View</button> <button class="btn ' + btn_run + ' btn-success me-4" onclick="javascript:showDialog();">Run</button><button class="btn ' + btn_session + '  btn-success me-4" onclick="javascript:download(\'' + data[i].filename + '\', \'' + btn_session + '\');" >Download</button><span style="margin:6px 0 0 30px; color:#aaa">' + message + '</span></div>').appendTo(item_contents);
 
         item_contents.appendTo(item);
-
         item.appendTo(contents);
     }
 
 
     if (selection == "python") {
-        $('#python-body').html(contents);
+         $('#python-body').html(contents); 
     } else if (selection == "r") {
-        $('#r-body').html(contents);
+        $('#r-body').html(contents); 
     } else {
         $('#jupyter-body').html(contents);
+        
     }
 
     accbtn();
@@ -177,13 +203,11 @@ async function show_grid(selection, per_num = 3, sel_page = 1) {
 select.addEventListener("change", function () {
     let pyfiles = document.querySelector('.python-files');
     rfiles = document.querySelector('.r-files');
-    jupfiles = document.querySelector('.jupyter-files');
     accordion = document.querySelector('.accordion-collapse')
 
     // When python is selected then hide jupyter files and R files
     if (select.value == 'python') {
         pyfiles.style.display = 'block';
-        jupfiles.style.display = 'none';
         rfiles.style.display = 'none';
         show_grid("python", per_num);
     }
@@ -192,19 +216,18 @@ select.addEventListener("change", function () {
     else if (select.value == 'r') {
         rfiles.style.display = 'block';
         pyfiles.style.display = 'none';
-        jupfiles.style.display = 'none';
         show_grid("r", per_num);
     }
 
-    // And when Jupyter is selected then hide Python files and R files.Show Jupyter files
-    else if (select.value == 'jupyter') {
-        jupfiles.style.display = 'block';
-        pyfiles.style.display = 'none';
-        rfiles.style.display = 'none';
-        show_grid("jupyter", per_num);
-    }
 });
-
+function RunReport (fileName) {
+    let url = 'https://hub.gke2.mybinder.org/user/sarus-support-python-samples-fhrsgy3b/lab/workspaces/auto-X/tree/bu/' + fileName;
+    window.open(url, '_blank').focus();
+}
+function RundirectReport() {
+    let url = 'https://mybinder.org/v2/gh/Sarus-Support/Python-Samples/HEAD';
+    window.open(url, '_blank').focus();
+}
 //this is the accordion button
 function accbtn() {
     let accbtn = document.getElementsByClassName("accordion-btn");
@@ -241,35 +264,6 @@ function accbtn() {
     } //closing to the for loop.
 }
 
-// form validation check
-// let sendtBtn = document.querySelector('.send-btn');
-
-// sendtBtn.addEventListener('click', function () {
-//     let nameInput = document.querySelector('.name input');
-//     companyInput = document.querySelector('.company input');
-//     messageInput = document.querySelector('.message textarea');
-
-//     if (nameInput.value.length < 3) { //if name inputs value is less then 3 character
-//         // then show the error text
-//         nameInput.nextElementSibling.style.display = 'block'
-
-//     } else if (nameInput.value.length > 3) { //if name inputs value is greater then 3 character
-//         nameInput.nextElementSibling.style.display = 'none' // then hide the error text
-//     }
-//     if (companyInput.value.length < 3) { //if company inputs value is less then 3 character
-//         companyInput.nextElementSibling.style.display = 'block' // then show the error text
-
-//     } else if (companyInput.value.length > 3) { //if Company inputs value is greater then 3 character
-//         companyInput.nextElementSibling.style.display = 'none' // then hide the error text
-//     }
-//     if (messageInput.value.length < 10) { //if message inputs value is less then 3 character
-//         messageInput.nextElementSibling.style.display = 'block' // then show the error text
-
-//     } else if (messageInput.value.length > 10) { //if Company inputs value is greater then 3 character
-//         messageInput.nextElementSibling.style.display = 'none' // then hide the error text
-//     }
-
-// })
 
 function pagination(selection, per_num = 3, sel_page = 1, dataRows) {
     total_page = Math.ceil(dataRows / per_num);
@@ -296,11 +290,11 @@ function pagination(selection, per_num = 3, sel_page = 1, dataRows) {
 
 function code_view(selection, url, btn_active) {
     if (btn_active != 'disabled') {
-        if (selection == "jupyter") {
-            msg = "View  the  source file in a web page?";
+       if (selection == "python") {
+            msg = "View  the  source file in a Jupyter Book reader?";
             dialogWindow(msg, 'query', 'confirm', 'Report Viewer',
                 function () {
-                    window.open("code_viewer?filetype=" + selection + "&url=" + url, '_blank');
+                    window.open("code_viewer?filetype=" + "jupyter" + "&url=" + url, '_blank');
                 }, null, null, {
                     Ok: 'Yes',
                     Cancel: 'No'
@@ -319,7 +313,6 @@ function code_view(selection, url, btn_active) {
             )
         }
     }
-   
 }
 
 function download(url, btn_active) {

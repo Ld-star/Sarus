@@ -6,11 +6,16 @@ const modelView=document.querySelector(".modelView");
 			const tooltip_att=["data-bs-toggle", "data-bs-placement","data-bs-html", "title"]
 			const tooltip_att_values=["tooltip","right","true","Double click to view the image"]
 
-			cross.addEventListener("click", () => {
-				modelView.classList.remove("modalVisible");
-				modelView.style.display = "none";
-				cross.style.display = "none";
-			})
+			try {
+				cross.addEventListener("click", () => {
+					modelView.classList.remove("modalVisible");
+					modelView.style.display = "none";
+					cross.style.display = "none";
+				})
+			} catch (error) {
+				
+			}
+			
 
 
 			const allImages = document.querySelectorAll(".main-content .modal-view")

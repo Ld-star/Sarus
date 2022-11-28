@@ -1,13 +1,265 @@
 <!-- JS Files -->
 
-<script src="/resources/js/home.js"></script>
+<script src="resources/jqwidgets/jqxcore.js"></script>
+<script src="resources/jqwidgets/jqxwindow.js" async></script>
+<script src="resources/jqwidgets/jqxsplitter.js" async></script>
+<script src="resources/jqwidgets/jqxexpander.js" async></script>
+<script src="resources/jqwidgets/jqxpopover.js" async></script>
+<script src="resources/jqwidgets/jqxbuttons.js" async></script>
+<script src="resources/jqwidgets/jqxscrollbar.js" async></script>
+<script src="resources/jqwidgets/jqxinput.js" async></script>
+<script src="resources/jqwidgets/jqxlistbox.js" async></script>
+<script src="resources/jqwidgets/jqxdropdownlist.js" async></script>
+<script src="resources/jqwidgets/jqxmenu.js" async></script>
+<script src="resources/jqwidgets/jqxcheckbox.js" async></script>
+<script src="resources/jqwidgets/jqxnotification.js"></script>
+<script src="dev/api/report_viewer.js"></script> 
+
+<!-- <script src="resources/js/slick.core.js"></script>
+<script src="resources/js/slick.formatters.js" async></script>
+<script src="resources/js/slick.editors.js"> async</script>
+<script src="resources/js/slick.rowselectionmodel.js" async></script>
+<script src="resources/js/slick.grid.js" async></script>
+<script src="resources/js/slick.dataview.js" async></script>
+<script src="resources/js/slick.cellrangeselector.js" async></script>
+<script src="resources/js/slick.cellselectionmodel.js" async></script>
+<script src="resources/js/slick.rowmovemanager.js" async></script>
+<script src="resources/js/slick.checkboxselectcolumn.js" async></script> -->
+
+<script>
+    $(document).ready(function() { 
+        $("#messageNotification").jqxNotification({
+            width: 250, position: "top-right", opacity: 0.9,
+            autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000, template: "info"
+        });
+        $('#logout').click(function() {
+            logout();
+        });
+        var session = getSession(); 
+        
+        var username_login = getSession('username_login');
+        console.log(username_login);
+        if(( session !== null && session !== "" &&  session !== undefined ) && (username_login == '' || username_login == undefined )) { 
+            // Get user data and check if session is not Expired
+            call_api_ajax('GetMyAccountDetails', 'get', { SessionToken: session }, true, (data) => {
+                    username = data.Result.Name;
+                    setSession( username, "username_login" ); 
+                },
+                () => {
+                    $('.home-menu').hide();
+                    $('.non-login').show();
+                    return false;
+                }, null, false); 
+        }
+        else if(username_login != '' && username_login != undefined && location.pathname != '/login'){
+            $('#login_name').text(username_login);
+            $('#username').text(username_login);
+            $('#profile').attr('href', 'profile?tab=MyProfile');
+            $('#favorites').attr('href', 'profilemain?tab=favorites'); 
+            $('.non-login').hide();
+            $('.home-menu').show();
+        }
+        
+    
+
+        loadScript('resources/js/home.js');
+        function loadScript(src) {
+            var scriptElem = document.createElement('script');
+            scriptElem.setAttribute('src', src);
+            scriptElem.setAttribute('type', 'text/javascript');
+            document.getElementsByTagName('head')[0].appendChild(scriptElem);
+        }
+        // console.log(location.pathname);
+        // if(  
+        //     location.pathname =='/'              ||
+        //     location.pathname ==  '/profilemain' ||
+        //     location.pathname == '/profile'      || 
+        //     location.pathname =='/report_viewer' ||
+        //     location.pathname =='/samples'       ||
+        //     location.pathname == '/r-package'    ||
+        //     location.pathname == '/privacy-policy' ||
+        //     location.pathname == '/contact-us'){
+        //         loadScript('resources/js/home.js');
+        // }
+        
+        var elements = $(".headerMenu");
+        var url = window.location.pathname;
+
+        /*elements.each(function (index) {
+            exp_url = url.split("/");
+            if (exp_url[1] == "") {
+                if (index == 0) {
+                    $("#menu" + index).attr("href", "#");
+                }
+                else {
+                    $("#menu" + index).attr("href", $("#menu" + index).attr("role"));
+                }
+            }
+            else {
+                if (index == 0) {
+                    $("#menu" + index).attr("href", $("#menu" + index).attr("role"));
+                }
+                else {
+                    if (url === $("#menu" + index).attr("role")) {
+                        $("#menu" + index).attr("href", "#");
+                    }
+                    else {
+                        if($("#menu" + index).attr("role") != '/profile' && $("#menu" + index).attr("role") != '/profilemain?tab=favorites'){
+                            $("#menu" + index).attr("href", $("#menu" + index).attr("role"));
+                        }
+                    }
+                }
+            }
+        });*/
+
+        $('.dropdown-btn1').click(function(e) {
+            e.stopPropagation();
+            if ($(this).children('.dropdown-item').hasClass('dropdown-item-shown') == true) {
+                $(this).children('.dropdown-item').removeClass('dropdown-item-shown')
+            } else($(this).children('.dropdown-item').addClass('dropdown-item-shown'))
+            $('.dropdown-btn2').children('.dropdown-item').removeClass('dropdown-item-shown')
+            $('.dropdown-btn3').children('.dropdown-item').removeClass('dropdown-item-shown')
+
+        });
+        $('.dropdown-btn2').click(function(e) {
+            e.stopPropagation();
+            if ($(this).children('.dropdown-item').hasClass('dropdown-item-shown') == true) {
+                $(this).children('.dropdown-item').removeClass('dropdown-item-shown')
+            } else($(this).children('.dropdown-item').addClass('dropdown-item-shown'))
+            $('.dropdown-btn1').children('.dropdown-item').removeClass('dropdown-item-shown');
+            $('.dropdown-btn3').children('.dropdown-item').removeClass('dropdown-item-shown');
+        });
+
+        $('.profile').click(function(e) {
+            e.stopPropagation();
+            if ($(this).children('.dropdown-item').hasClass('dropdown-item-shown') == true) {
+                $(this).children('.dropdown-item').removeClass('dropdown-item-shown')
+            } else($(this).children('.dropdown-item').addClass('dropdown-item-shown'))
+            $('.dropdown-btn1').children('.dropdown-item').removeClass('dropdown-item-shown');
+            $('.dropdown-btn2').children('.dropdown-item').removeClass('dropdown-item-shown')
+            $('.dropdown-btn3').children('.dropdown-item').removeClass('dropdown-item-shown');
+        });
+
+        $(document).on('click', function(e) {
+            if ($(e.target).is(".dropdown-btn") == false && $('.dropdown-item').hasClass(
+                    'dropdown-item-shown')) {
+                console.log("button clicked"); 
+                logout();
+                $('.dropdown-item').removeClass('dropdown-item-shown');
+
+            }
+        });
+
+        $('.navbar .bar').click(function() {
+            $('.nav-menu').addClass('nav-menu-shown')
+            if ($('.footer-menu').hasClass('nav-menu-shown')) {
+                $('.footer-menu').removeClass('nav-menu-shown')
+            }
+        });
+
+
+        $('.navbar .close-btn').click(function() {
+            $('.nav-menu').removeClass('nav-menu-shown')
+        });
+
+
+        $(window).resize(function() {
+            if ($('.nav-menu').hasClass('nav-menu-shown')) {
+                $('.nav-menu').removeClass('nav-menu-shown')
+            }
+        });
+
+        let lastScrollTop = 0;
+        $(window).scroll(function(event) {
+            let st = $(this).scrollTop();
+            if (st > lastScrollTop && lastScrollTop >= 0) {
+                $('.navbar').css({
+                    top: '-110px'
+                });
+                $('.dropdown-item').removeClass('dropdown-item-shown');
+                $('.nav-menu').removeClass('nav-menu-shown');
+                $('.marquee-wrapper').css({
+                    visibility: 'hidden',
+                    opacity: '0'
+
+                });
+
+            } else if (st < lastScrollTop) {
+                $('.navbar').css({
+                    top: '0'
+                })
+
+                $('.marquee-wrapper').css({
+                    visibility: 'visible',
+                    opacity: 1
+                })
+            }
+            lastScrollTop = st;
+        });
+    });
+
+    
+
+    function go_url(url, page_type = "private") {
+        var path = window.location.pathname;
+        if (path !== url) {
+            if ((getSession() == undefined || getSession() == "") && page_type == "private") {
+                openLoginPopup();
+            } else {
+                if (path == "/report_viewer") {
+                    dialogWindow("The report will be lost if you continue.<br>Open the request in a new tab?", "query", "confirm", "Monitor+", () => {
+                        var jsonObj = request_editor.get();
+                        // var jsonObj1 = getJsonTree(notes_editor);
+                        // var jsonObj2 = getJsonTree(user_editor);
+
+                        if (JSON.stringify(jsonObj) != JSON.stringify(requestParameters)) {
+                            edit_flag = true;
+                        }
+
+                        if (edit_flag == true) {
+                            dialogWindow("The report may have been changed.<br/>If you load a new report you my lose these changes.<br>Do you want continue?", "query", "confirm", "Monitor+", () => {
+                                window.open(url, '_blank');
+                            }, () => {
+                                window.open(url, '_self');
+                            }, null, {
+                                Ok: "Yes",
+                                Cancel: "No",
+                                Destroy: "Cancel"
+                            });
+                        } else {
+                            window.open(url, '_blank');
+                        }
+                    }, () => {
+                        window.open(url, '_self');
+                        //                    }, null, { Ok: "Yes", Cancel: "No" });
+                    }, null, {
+                        Ok: "Yes",
+                        Cancel: "No",
+                        Destroy: "Cancel"
+                    });
+                } else {
+                    window.open(url, '_self');
+                }
+            }
+        }
+    }
+</script>
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer"
 />
 
-<link rel="stylesheet" href="resources/css/monitor-gui.css" type="text/css" />
-<link rel="stylesheet" href="resources/css/monitor-ui.css" type="text/css" />
 
 <style>
+     /* .jqx-rc-all ~ #jqxNotificationDefaultContainer-top-left, #jqxNotificationDefaultContainer-top-left ~.jqx-rc-all {
+        display: none;
+    } */
+    body > .jqx-rc-all{
+        display: none;
+    }
+    .jqx-notification-close-button-warning{
+        background-image:url(/resources/css/images/close_white.png) !important
+    }
     #menu12 {
         display: none;
         top: 50%;
@@ -18,6 +270,9 @@
     }
     #other_id:hover #menu12 {
         display: block;
+    }
+    #btnLoadReport:hover, #btnCancelModal:hover{
+        box-shadow: -1px 0 5px rgb(0 0 0 / 25%) !important
     }
 </style>
 <!-- header area -->
@@ -37,6 +292,8 @@
         <br> Returns series containing the phrase "Crude oil" but <span class="underline">not</span> the word "Brent".
     </div>
 </div>
+
+
 
 <div id='reportCreatorGridMenu' class="nondisp">
     <ul>
@@ -289,8 +546,8 @@
 
     <li class="nav-item"><a class="nav-link headerMenu" href="/contact-us" id="menu7" role="/contact-us">Contact</a>
     </li>
-    <li class="nav-item register non-login"><a class="nav-link headerMenu" href="/registration" id="menu8" role="/registration">Register</a></li>
-    <li class="nav-item login non-login"><a class="nav-link headerMenu" href="/login" id="menu9" role="/login">Login</a>
+    <li class="nav-item register non-login"  ><a class="nav-link headerMenu" href="/registration" id="menu8" role="/registration">Register</a></li>
+    <li class="nav-item login non-login"  ><a class="nav-link headerMenu" href="/login" id="menu9" role="/login">Login</a>
     </li>
     <li class="dropdown-btn profile home-menu "   style="display: none;">
         <a class="nav-link"><img src="/resources/css/fonts/man.png" alt=""> <span id="login_name"></span> <i class="fas fa-caret-down"></i> </a>
@@ -318,196 +575,3 @@
     <span class="bar3"></span>
 </div>
 
-<script>
-    $(document).ready(function() {
-
-        var elements = $(".headerMenu");
-        var url = window.location.pathname;
-
-        /*elements.each(function (index) {
-            exp_url = url.split("/");
-            if (exp_url[1] == "") {
-                if (index == 0) {
-                    $("#menu" + index).attr("href", "#");
-                }
-                else {
-                    $("#menu" + index).attr("href", $("#menu" + index).attr("role"));
-                }
-            }
-            else {
-                if (index == 0) {
-                    $("#menu" + index).attr("href", $("#menu" + index).attr("role"));
-                }
-                else {
-                    if (url === $("#menu" + index).attr("role")) {
-                        $("#menu" + index).attr("href", "#");
-                    }
-                    else {
-                        if($("#menu" + index).attr("role") != '/profile' && $("#menu" + index).attr("role") != '/profilemain?tab=favorites'){
-                            $("#menu" + index).attr("href", $("#menu" + index).attr("role"));
-                        }
-                    }
-                }
-            }
-        });*/
-
-        $('.dropdown-btn1').click(function(e) {
-            e.stopPropagation();
-            if ($(this).children('.dropdown-item').hasClass('dropdown-item-shown') == true) {
-                $(this).children('.dropdown-item').removeClass('dropdown-item-shown')
-            } else($(this).children('.dropdown-item').addClass('dropdown-item-shown'))
-            $('.dropdown-btn2').children('.dropdown-item').removeClass('dropdown-item-shown')
-            $('.dropdown-btn3').children('.dropdown-item').removeClass('dropdown-item-shown')
-
-        });
-        $('.dropdown-btn2').click(function(e) {
-            e.stopPropagation();
-            if ($(this).children('.dropdown-item').hasClass('dropdown-item-shown') == true) {
-                $(this).children('.dropdown-item').removeClass('dropdown-item-shown')
-            } else($(this).children('.dropdown-item').addClass('dropdown-item-shown'))
-            $('.dropdown-btn1').children('.dropdown-item').removeClass('dropdown-item-shown');
-            $('.dropdown-btn3').children('.dropdown-item').removeClass('dropdown-item-shown');
-        });
-
-        $('.profile').click(function(e) {
-            e.stopPropagation();
-            if ($(this).children('.dropdown-item').hasClass('dropdown-item-shown') == true) {
-                $(this).children('.dropdown-item').removeClass('dropdown-item-shown')
-            } else($(this).children('.dropdown-item').addClass('dropdown-item-shown'))
-            $('.dropdown-btn1').children('.dropdown-item').removeClass('dropdown-item-shown');
-            $('.dropdown-btn2').children('.dropdown-item').removeClass('dropdown-item-shown')
-            $('.dropdown-btn3').children('.dropdown-item').removeClass('dropdown-item-shown');
-        });
-
-        $(document).on('click', function(e) {
-            if ($(e.target).is(".dropdown-btn") == false && $('.dropdown-item').hasClass(
-                    'dropdown-item-shown')) {
-                console.log("button clicked");
-                $('.dropdown-item').removeClass('dropdown-item-shown');
-
-            }
-        });
-
-        $('.navbar .bar').click(function() {
-            $('.nav-menu').addClass('nav-menu-shown')
-            if ($('.footer-menu').hasClass('nav-menu-shown')) {
-                $('.footer-menu').removeClass('nav-menu-shown')
-            }
-        });
-
-
-        $('.navbar .close-btn').click(function() {
-            $('.nav-menu').removeClass('nav-menu-shown')
-        });
-
-
-        $(window).resize(function() {
-            if ($('.nav-menu').hasClass('nav-menu-shown')) {
-                $('.nav-menu').removeClass('nav-menu-shown')
-            }
-
-        });
-
-        let lastScrollTop = 0;
-        $(window).scroll(function(event) {
-            let st = $(this).scrollTop();
-
-            if (st > lastScrollTop && lastScrollTop >= 0) {
-                $('.navbar').css({
-                    top: '-110px'
-                });
-                $('.dropdown-item').removeClass('dropdown-item-shown');
-                $('.nav-menu').removeClass('nav-menu-shown');
-                $('.marquee-wrapper').css({
-                    visibility: 'hidden',
-                    opacity: '0'
-
-                });
-
-            } else if (st < lastScrollTop) {
-                $('.navbar').css({
-                    top: '0'
-                })
-
-                $('.marquee-wrapper').css({
-                    visibility: 'visible',
-                    opacity: 1
-                })
-
-            }
-            lastScrollTop = st;
-        });
-    });
-
-    function loadScript(src) {
-        var scriptElem = document.createElement('script');
-        scriptElem.setAttribute('src', src);
-        scriptElem.setAttribute('type', 'text/javascript');
-        document.getElementsByTagName('head')[0].appendChild(scriptElem);
-    }
-
-    if (location.pathname !== '/login' &&
-        location.pathname !== '/' &&
-        location.pathname !== '/contact-us' &&
-        location.pathname !== '/r-package' &&
-        location.pathname !== '/python-api' &&
-        location.pathname !== '/api-docs' &&
-        location.pathname !== '/samples' &&
-        location.pathname !== '/developer-page' &&
-        location.pathname !== '/vendor-page' &&
-        location.pathname !== '/m-api' &&
-        location.pathname !== '/xlerate' &&
-        location.pathname !== '/databases' &&
-        location.pathname !== '/faq' &&
-        location.pathname !== '/terms-and-conditions' &&
-        location.pathname !== '/work-with-us' &&
-        location.pathname !== '/privacy-policy' &&
-        location.pathname !== '/fair-use-policy' &&
-        location.pathname !== '/cookie-policy') {
-        setTimeout("loadScript('resources/js/reportCreator.js');", 100);
-    }
-
-    function go_url(url, page_type = "private") {
-        var path = window.location.pathname;
-        if (path !== url) {
-            if ((getSession() == undefined || getSession() == "") && page_type == "private") {
-                openLoginPopup();
-            } else {
-                if (path == "/report_viewer") {
-                    dialogWindow("The report will be lost if you continue.<br>Open the request in a new tab?", "query", "confirm", "Monitor+", () => {
-                        var jsonObj = request_editor.get();
-                        // var jsonObj1 = getJsonTree(notes_editor);
-                        // var jsonObj2 = getJsonTree(user_editor);
-
-                        if (JSON.stringify(jsonObj) != JSON.stringify(requestParameters)) {
-                            edit_flag = true;
-                        }
-
-                        if (edit_flag == true) {
-                            dialogWindow("The report may have been changed.<br/>If you load a new report you my lose these changes.<br>Do you want continue?", "query", "confirm", "Monitor+", () => {
-                                window.open(url, '_blank');
-                            }, () => {
-                                window.open(url, '_self');
-                            }, null, {
-                                Ok: "Yes",
-                                Cancel: "No",
-                                Destroy: "Cancel"
-                            });
-                        } else {
-                            window.open(url, '_blank');
-                        }
-                    }, () => {
-                        window.open(url, '_self');
-                        //                    }, null, { Ok: "Yes", Cancel: "No" });
-                    }, null, {
-                        Ok: "Yes",
-                        Cancel: "No",
-                        Destroy: "Cancel"
-                    });
-                } else {
-                    window.open(url, '_self');
-                }
-            }
-        }
-    }
-</script>
